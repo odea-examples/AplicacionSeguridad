@@ -1,0 +1,337 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,hr
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent
+}
+
+em {
+	font-style: normal
+}
+
+strong {
+	font-weight: normal
+}
+
+a {
+	text-decoration: none
+}
+
+body {
+	line-height: 1
+}
+
+ol,ul {
+	list-style: none
+}
+
+blockquote,q {
+	quotes: none
+}
+
+ins {
+	text-decoration: none
+}
+
+del {
+	text-decoration: line-through
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+input::-moz-focus-inner,button::-moz-focus-inner {
+	border: 0;
+	padding: 0
+}
+
+article,aside,dialog,figure,footer,header,hgroup,menu,nav,section,time,mark,audio,video
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent
+}
+
+article,aside,dialog,figure,footer,header,hgroup,nav,section {
+	display: block
+}
+
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none
+}
+
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold
+}
+
+del {
+	text-decoration: line-through
+}
+
+abbr[title],dfn[title] {
+	border-bottom: 1px dotted #000;
+	cursor: help
+}
+
+input,select {
+	vertical-align: middle
+}
+
+body {
+	background: #56626d;
+	color: #222;
+	font: 13px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+	overflow-y: scroll
+}
+
+h1,h2,h3,h4,h5 {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+a:link,a:visited,span.link-like {
+	color: rgb(105, 107, 104);
+	outline: none;
+	font-weight: bold;
+	text-decoration: underline
+}
+
+a:hover,span.link-like:hover {
+	color: #FFFFFF;
+	background: rgba(29, 121, 194, 0.98)
+}
+
+a:active {
+	outline: none
+}
+
+#sitewrapper {
+	width: 485px;
+	margin: 50px auto 0 auto
+}
+
+#logo {
+	display: block;
+	width: 96px;
+	height: 28px;
+	margin: 0 auto 20px auto;
+	font: bold 28px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-indent: -9999em;
+	background-image: url("/images/logo@2x.png");
+	background-size: 96px 28px;
+	opacity: .3;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s
+}
+
+#logo:hover {
+	background-color: transparent;
+	opacity: .5
+}
+
+#logo:active {
+	position: relative;
+	top: 1px
+}
+
+#content {
+	background: #FFF;
+	padding: 20px;
+	border-radius: 5px
+}
+
+#main h1 {
+	font-size: 18px;
+	padding-bottom: 7px;
+	margin-bottom: 10px
+}
+
+#main fieldset {
+	border: none;
+	padding-left: 15px;
+	margin: 15px 0 0 0;
+	position: inherit;
+	background: transparent url("/images/bg_fieldset.gif") repeat-y 0 0
+}
+
+#main fieldset p {
+	clear: left
+}
+
+#main fieldset p label {
+	font-size: 13px;
+	color: #444;
+	display: block
+}
+
+#main fieldset p span {
+	display: block;
+	margin-top: 5px
+}
+
+#main fieldset p span input {
+	border: 1px solid #a7a7a7;
+	padding: 6px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: 700
+}
+
+#main fieldset#user-email p span input {
+	width: 385px
+}
+
+#main fieldset#user-password p span input {
+	width: 190px
+}
+
+#main fieldset#user-password {
+	margin-bottom: 20px
+}
+
+#main fieldset#user-password p strong {
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 32px 50px 0 0;
+	float: right
+}
+
+#main div#password label#remember-password {
+	display: inline-block;
+	margin: 10px 0 0 0;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif
+}
+
+#main #forgot-password {
+	padding: 20px 0 0 15px
+}
+
+#main #forgot-password label {
+	padding-left: 10px
+}
+
+.flash {
+	position: relative;
+	z-index: 5000
+}
+
+.flash.good {
+	background: #86D958;
+	padding: 10px;
+	margin: 0 0 20px 0
+}
+
+.flash.bad {
+	background: #F5DC63;
+	padding: 10px;
+	margin: 0 0 20px 0
+}
+
+.flash div.inner {
+	padding: 10px 15px 10px 70px;
+	font-size: 12px;
+	color: #000000;
+	text-align: left;
+	min-height: 30px
+}
+
+.flash div.inner h3 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 5px 0;
+	display: block;
+	padding: 0;
+	border: none
+}
+
+.flash div.inner ul {
+	margin-left: 20px
+}
+
+.flash div.inner ul li {
+	line-height: 150%;
+	list-style-type: square
+}
+
+.flash div.inner a.large {
+	line-height: 40px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold
+}
+
+.flash div.inner a {
+	font-weight: bold
+}
+
+.flash.good div.inner {
+	background: #fff url("/images/icon_check.gif") no-repeat 20px 15px
+}
+
+.flash.bad div.inner {
+	background: #fff url("/images/icon_yeild.gif") no-repeat 15px 15px
+}
+
+.flash.no-explanation div.inner {
+	font-weight: bold;
+	min-height: 35px;
+	font-size: 14px
+}
+
+.btn {
+	font-size: 12px !important;
+	font-weight: normal !important;
+	color: #fff !important;
+	background: rgb(52, 91, 140) !important;
+	padding: 6px 12px !important;
+	text-transform: uppercase !important;
+	text-decoration: none !important;
+	border-radius: 3px !important;
+	border: 0 none !important;
+	cursor: pointer !important;
+	-webkit-transition: background 0.15s !important;
+	transition: background 0.15s !important
+}
+
+.btn:hover {
+	background-color: rgba(29, 121, 194, 0.98) !important;
+	color: #fff !important
+}
+
+.btn.btn_large {
+	padding: 17px 27px !important
+}
+
+.btn.btn_block {
+	display: block !important;
+	width: 100% !important
+}
+
+.btn.btn_report {
+	display: block !important;
+	padding: 15px 0 !important;
+	width: 100% !important
+}
+
+a#cancel {
+	float: right !important;
+	margin: 15px 0 0 0 !important;
+	display: inline-block;
+	clear: both !important
+}

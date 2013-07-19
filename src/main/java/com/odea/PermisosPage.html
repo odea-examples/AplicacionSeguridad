@@ -1,0 +1,28 @@
+<wicket:head>
+	<link href="styles/tables.css" rel="stylesheet" type="text/css" />
+	
+	<style type='text/css'>
+		label { float: left; width: 120px; }
+		input[type=text] {width: 100px; }
+		select {width: 300px;}		
+	</style>
+	
+</wicket:head>
+
+<wicket:extend>
+	
+	<div wicket:id="listViewContainer" style="position: relative; min-width: 1024px; min-height: 270px;">
+		<table>
+			<thead>
+				<tr wicket:id="tituloHtml"/>
+			</thead>
+			<tbody>
+				<tr wicket:id="listaFuncionalidades">
+					<td wicket:id="nombreFuncionalidad"/>
+					<td wicket:id="listaUsuarios"><input type="checkbox" wicket:id="check"/></td>
+				</tr>
+			</tbody>				
+		</table>
+	</div>
+		
+</wicket:extend>

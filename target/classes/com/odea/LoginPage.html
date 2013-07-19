@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  	<link href="styles/login.css" rel="stylesheet" type="text/css"/>
+</head>
+<body id="login">
+
+	<div id="sitewrapper">
+	  <!--div id="header">
+	    <a id="logo" href="odea page">aca va un logo si quieren</a>
+	  </div -->
+	  <!-- /header -->
+	        <div id="content">
+	            <div id="main">
+			<!-- esta parte es la del mensaje de error de wrong passwd hay que ponerlo dentro de un webmarkup container y mostrarlo solo cdo rompe el login -->
+	                
+	                <h1>Aplicaci&oacute;n de Seguridad</h1>
+	                
+	                <form wicket:id="loginForm" accept-charset="UTF-8"  name="login_form">
+	                
+	                <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓">
+	                	<input name="authenticity_token" type="hidden" value="TnYiK1KZTJ8lH9JHuPWbJks8k858DfPiSNmi2ZiVfS8=">
+	                </div>
+	                
+	                <div wicket:id="feedBackPanel" id="forgot-password-flash" class="flash bad" style="display:none;">
+	                    <div class="inner">
+	                        <h3>Did you forget your password?</h3>
+	                        Shame shame… Not really - It's actually no problem at all. Just enter your email in the box below and we'll reset it for you.
+	                    </div>
+	                </div>
+	                
+	                    <div id="email">
+	                        <fieldset id="user-email">
+	                            <p>
+	                                <label>Usuario<span><input wicket:id="userName" type="text" name="user_login" tabindex="1"></span></label>
+	                            </p>
+	                        </fieldset>
+	                    </div>
+	                    <div id="password">
+	                        <fieldset id="user-password">
+	                            <p>
+	                                <strong>Oops - <a>olvid&eacute; mi password</a></strong>
+	                                <label>Password<span><input wicket:id="passwd" type="password" name="user_password" tabindex="2"></span></label>
+	                            </p>
+	                        </fieldset>
+	                        <p>
+	                            <input wicket:id="submit" value="Entrar" type="submit" class="btn btn_large btn_block" tabindex="3">
+	                            <!--label id="remember-password"><input name="remember[password]" type="hidden" value=""><input checked="checked" id="remember_password" name="remember[password]" type="checkbox" value="1"> Remember me for 30 days</label-->
+	                        </p>
+	                    </div>
+	                    <!--div id="forgot-password" style="display:none;">
+	                        <input name="commit" type="submit" value="Email me my password">
+	                        <label>Just kidding <a href="https://secure.tickspot.com/login#" id="remember-password-link">I remember now</a></label>
+	                    </div-->
+				</form>
+				</div>
+	            <!-- /main -->
+	        </div>
+	        <!-- /content -->
+	</div>
+</body>
+</html>	
