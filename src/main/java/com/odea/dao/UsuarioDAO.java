@@ -35,6 +35,142 @@ public class UsuarioDAO extends AbstractDAO {
 		return usuarios;
 	}
 	
+	
+	public List<String> getNombresPerfiles() {
+		List<String> nombresPerfiles = jdbcTemplate.query("SELECT u_name FROM users WHERE u_tipo = 'P' ORDER BY u_name ASC", new RowMapper<String>() {
+
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString(1);
+			}
+			
+		});
+		
+		return nombresPerfiles;
+	}
+	
+	public Integer getDedicacion(Usuario usuario){
+		return jdbcTemplate.queryForInt("SELECT dedicacion FROM dedicacion_usuario WHERE usuario_id=? AND fecha_hasta is NULL", usuario.getIdUsuario());
+	}
+	
+	public void setDedicacion(Usuario usuario, int dedicacion){
+		Date fechaActual = new Date();
+		try {
+			jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta=? WHERE fecha_hasta is NULL AND usuario_id=?", fechaActual, usuario.getIdUsuario());
+			jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), fechaActual, dedicacion);						
+		} catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+	
+	public List<Usuario> getPerfiles() {
+		List<Usuario> listaPerfiles = jdbcTemplate.query("SELECT u_id, u_name, u_login FROM users WHERE u_tipo = 'P' ORDER BY u_name ASC", new RowMapperPerfil());
+		return listaPerfiles;
+	}
+	
+	
+	public void altaUsuario(Usuario usuario) {
+		
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U'", usuario.getNombreLogin());
+		
+		if (cantidad.equals(1)) {
+			throw new RuntimeException("El nombre de login ya está en uso. Por favor elija otro.");
+		}
+		
+		String sqlUsuario = "INSERT INTO users (u_name, u_login, u_password, u_grupo, u_tipo) VALUES (?, ?, password(?), ?, 'U')";
+		jdbcTemplate.update(sqlUsuario, usuario.getNombre(), usuario.getNombreLogin(), usuario.getPassword(), usuario.getGrupo());
+		
+		Integer idUsuario = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ?", usuario.getNombre());
+		Integer idPerfil = usuario.getPerfil().getIdUsuario();
+
+		String sqlDedicacion = "INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)";
+		jdbcTemplate.update(sqlDedicacion, idUsuario, new Date(), usuario.getDedicacion());
+				
+		String sqlPerfil = "INSERT INTO SEC_ASIG_PERFIL (SEC_USUARIO_ID, SEC_PERFIL_ID) VALUES (?,?)";
+		jdbcTemplate.update(sqlPerfil, idUsuario, idPerfil);
+		
+		logger.debug("NUEVO USUARIO CREADO - USERNAME: " + usuario.getNombreLogin());
+		
+	}
+	
+	public void bajaUsuario(Usuario usuario) {
+		
+		jdbcTemplate.update("DELETE FROM dedicacion_usuario WHERE usuario_id = ?", usuario.getIdUsuario());
+		jdbcTemplate.update("DELETE FROM SEC_ASIG_PERFIL WHERE SEC_USUARIO_ID = ?", usuario.getIdUsuario());
+		jdbcTemplate.update("DELETE FROM users WHERE u_id = ?", usuario.getIdUsuario());
+		
+		logger.debug("USUARIO BORRADO - USERNAME: " + usuario.getNombreLogin());
+	}
+	
+	
+	public void modificarUsuario(Usuario usuario) {
+		
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U'", usuario.getNombreLogin());
+		
+		if (cantidad.equals(1)) {
+			throw new RuntimeException("El nombre de login ya está en uso. Por favor elija otro.");
+		}
+		
+		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ?, u_password = ?, u_grupo = ? WHERE u_tipo = 'U' AND u_id = ?", usuario.getNombre(), usuario.getNombre(), usuario.getPassword(), usuario.getGrupo(), usuario.getIdUsuario());
+		
+		jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta = ? WHERE fecha_hasta is NULL AND usuario_id = ?", new Date(), usuario.getIdUsuario());
+		jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), new Date(), usuario.getDedicacion());
+
+		jdbcTemplate.update("UPDATE SEC_ASIG_PERFIL SET SEC_PERFIL_ID = ? WHERE SEC_USUARIO_ID = ?", usuario.getPerfil().getIdUsuario(), usuario.getIdUsuario());
+		
+		logger.debug("SE HA MODIFICADO EL USUARIO - ID: " + usuario.getIdUsuario());
+	}
+	
+	
+	public void altaPerfil(Usuario perfil) {
+		
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_name = ? AND u_tipo = 'P'", perfil.getNombre());
+		
+		if (cantidad.equals(1)) {
+			throw new RuntimeException("El nombre ya está en uso. Por favor elija otro.");
+		}
+		
+		jdbcTemplate.update("INSERT INTO users (u_login, u_name, u_tipo) VALUES (?,?,'P')", perfil.getNombre(), perfil.getNombre());
+		
+		logger.debug("ALTA DE PERFIL - NOMBRE: " + perfil.getNombre());
+	}
+	
+	public void bajaPerfil(Usuario perfil) {
+		
+		Integer cantidadUsuarios = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM SEC_ASIG_PERFIL WHERE SEC_PERFIL_ID = ?", perfil.getIdUsuario());
+		
+		if (cantidadUsuarios > 0) {
+			throw new RuntimeException("El perfil no puede ser borrado ya que tiene usuarios asignados.");
+		}
+		
+		jdbcTemplate.update("DELETE FROM SEC_PERMISO WHERE SEC_USUARIO_PERFIL_ID = ?", perfil.getIdUsuario());
+		
+		jdbcTemplate.update("DELETE FROM users WHERE u_id = ?", perfil.getIdUsuario());
+		
+		logger.debug("PERFIL BORRADO - NOMBRE: " + perfil.getNombre());
+	}
+	
+	public void modificarPerfil(Usuario perfil) {
+		
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_name = ? AND u_tipo = 'P'", perfil.getNombre());
+		
+		if (cantidad.equals(1)) {
+			throw new RuntimeException("El nombre ya está en uso. Por favor elija otro.");
+		}
+		
+		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ? WHERE u_tipo = 'P' AND u_id = ?", perfil.getNombre(), perfil.getNombre(), perfil.getIdUsuario());
+			
+		logger.debug("SE HA MODIFICADO EL PERFIL - ID: " + perfil.getIdUsuario());
+	}
+	
+	
+	public Usuario getPerfilDeNombre(String nombre) {
+		Usuario perfil = jdbcTemplate.queryForObject("SELECT u_id, u_name, u_login FROM users WHERE u_tipo = 'P' AND u_name = ?", new RowMapperPerfil(), nombre);
+		
+		return perfil;
+	}
+	
+	
 	//RowMappers
 	
 	private class RowMapperUsuario implements RowMapper<Usuario>{
@@ -58,5 +194,23 @@ public class UsuarioDAO extends AbstractDAO {
 		}
 		
 	}
+	
+	private class RowMapperPerfil implements RowMapper<Usuario> {
+
+		@Override
+		public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Usuario perfil = new Usuario();
+			
+			perfil.setIdUsuario(rs.getInt(1));
+			perfil.setNombre(rs.getString(2));
+			perfil.setNombreLogin(rs.getString(3));
+			
+			return perfil;
+		}
+		
+	}
+
+	
+
 	
 }

@@ -2,7 +2,7 @@ package com.odea.domain;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable, Comparable<Usuario> {
+public class Usuario implements Serializable {
 	
 	private int idUsuario;
 	private String nombreLogin;
@@ -11,6 +11,11 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 	private Boolean esCoManager;
 	private Usuario perfil;
 	private String grupo;
+	private Integer dedicacion;
+	
+	public Usuario() {
+		
+	}
 	
 	public Usuario(int id, String nombreLogin, String password, String nombre, Boolean coManager, Usuario perfil) {
 		this.idUsuario = id;
@@ -103,17 +108,17 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 		this.grupo = grupo;
 	}
 
+	public Integer getDedicacion() {
+		return dedicacion;
+	}
+
+	public void setDedicacion(Integer dedicacion) {
+		this.dedicacion = dedicacion;
+	}
+
 	@Override
 	public String toString() {
 		return this.nombreLogin;
 	}
-
-	
-	
-	@Override
-	public int compareTo(Usuario otroUsuario) {
-		return this.getNombreLogin().compareTo(otroUsuario.getNombreLogin());
-	}
-
 	
 }

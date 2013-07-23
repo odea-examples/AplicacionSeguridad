@@ -87,13 +87,6 @@ public class SeguridadDAO extends AbstractDAO {
 	
 	
 	
-	public List<Usuario> getPerfiles()
-	{
-		List<Usuario> listaUsuarios = jdbcTemplate.query("SELECT u_id, u_login, u_password, u_name FROM users WHERE u_tipo = 'P' ORDER BY u_name ASC", new RowMapperUsuario());
-		
-		return listaUsuarios;
-	}
-	
 	public List<Usuario> getUsuariosQueTienenUnaFuncionalidad(Funcionalidad funcionalidad) {
 		
 		List<Usuario> usuarios = jdbcTemplate.query("SELECT u_id, u_login, u_password, u_name FROM users WHERE u_id in (SELECT SEC_USUARIO_PERFIL_ID FROM SEC_PERMISO WHERE SEC_FUNCIONALIDAD_ID = ? AND ESTADO = 'Habilitado')", new RowMapperUsuario(), funcionalidad.getID());
@@ -127,6 +120,27 @@ public class SeguridadDAO extends AbstractDAO {
 		}
 		
 		return nombrePerfil;
+	}
+	
+public void cambiarGrupo(Usuario usuario, String grupo) {
+		
+		logger.debug("SE PROCEDE A CAMBIAR AL USUARIO - ID: "+ usuario.getIdUsuario() +" - Login: " + usuario.getNombreLogin() + " - AL GRUPO: " + grupo);
+		
+		jdbcTemplate.update("UPDATE users SET u_grupo = ? WHERE u_id = ?", grupo, usuario.getIdUsuario());
+		
+		logger.debug("SE HA CAMBIADO AL USUARIO - ID: "+ usuario.getIdUsuario() +" - Login: " + usuario.getNombreLogin() + " - AL GRUPO: " + grupo);
+		
+	}
+	
+	public void cambiarPerfil(Usuario usuario, String nombrePerfil) {
+
+		int perfilID = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ? AND u_tipo = 'P'", nombrePerfil);
+		
+		String sql = "UPDATE SEC_ASIG_PERFIL SET SEC_PERFIL_ID = ? WHERE SEC_USUARIO_ID = ?";
+		
+		jdbcTemplate.update(sql, perfilID, usuario.getIdUsuario());
+		
+		logger.debug("CAMBIO DE ROL REALIZADO");
 	}
 	
 	
@@ -165,6 +179,5 @@ public class SeguridadDAO extends AbstractDAO {
 			return funcionalidad;
 		}
 	}	
-	
 	
 }

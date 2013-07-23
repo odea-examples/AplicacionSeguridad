@@ -1,0 +1,35 @@
+<wicket:head>
+	<link href="styles/tables.css" rel="stylesheet" type="text/css" />
+</wicket:head>
+
+<wicket:extend>
+
+	<h4><a wicket:id="linkAltaPerfil" href="#" class="nav">Agregar un nuevo perfil</a></h4>
+
+	<div wicket:id="listViewContainer">
+
+		
+		<table>
+			<thead>
+				<tr class="odd">
+					<th scope="col">Nombre</th>
+					<th scope="col">Modificar</th>
+					<th scope="col">Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr wicket:id="perfiles">
+					<td wicket:id="nombrePerfil"/>
+					<td><a wicket:id="modifyLink" class="more" href="#"><img src="images/modificarIcon.gif" alt="modificarIcon"/></a></td>
+					<td><a wicket:id="deleteLink" class="more" href="#"><img src="images/delete.png" alt="delete"/></a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+	            <tr>
+	                <td wicket:id="navigator" align="center" colspan="4" ></td>
+	            </tr>
+        	</tfoot>
+		</table>
+	</div>
+
+</wicket:extend>
