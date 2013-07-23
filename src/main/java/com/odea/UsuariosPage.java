@@ -79,6 +79,8 @@ public class UsuariosPage extends BasePage {
 		//LISTADO
 		PageableListView<Usuario> usuariosListView = new PageableListView<Usuario>("usuarios", this.lstUsuariosModel, 20) {
 			
+			private static final long serialVersionUID = 1L;
+
 			@Override
             protected void populateItem(ListItem<Usuario> item) {
             	final Usuario usuario = item.getModel().getObject();   
@@ -99,7 +101,9 @@ public class UsuariosPage extends BasePage {
             	
             	dedicacionTextField.add(new AjaxFormComponentUpdatingBehavior("onchange") {
             		
-    				@Override
+					private static final long serialVersionUID = 1L;
+
+					@Override
     				protected void onUpdate(AjaxRequestTarget target) {
     					daoService.setDedicacion(usuario, Integer.parseInt(dedicacionTextField.getInput()));
     					usuario.setDedicacion(dedicacionTextField.getModelObject());
@@ -122,6 +126,8 @@ public class UsuariosPage extends BasePage {
             	final DropDownChoice<Usuario> dropDownPerfil = new DropDownChoice<Usuario>("dropDownPerfil", Model.of(usuario.getPerfil()), UsuariosPage.this.lstPerfilesModel);
             	            	
             	dropDownPerfil.add(new AjaxFormComponentUpdatingBehavior("onchange") {
+
+					private static final long serialVersionUID = 1L;
 
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
