@@ -25,13 +25,14 @@ import com.odea.domain.Usuario;
 import com.odea.services.DAOService;
 
 public class UsuariosPage extends BasePage {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	@SpringBean
 	public DAOService daoService;
 	
 	public IModel<List<Usuario>> lstUsuariosModel;
 	public IModel<List<Usuario>> lstPerfilesModel;
-	public IModel<List<String>> lstNombresPerfilesModel;
 	public IModel<List<String>> lstGruposModel;
 	public WebMarkupContainer listViewContainer;
 	
@@ -49,13 +50,13 @@ public class UsuariosPage extends BasePage {
             
         };
         
-        this.lstNombresPerfilesModel = new LoadableDetachableModel<List<String>>() { 
+        this.lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() { 
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-            protected List<String> load() {
-            	return daoService.getNombresPerfiles();
+            protected List<Usuario> load() {
+            	return daoService.getPerfiles();
             }
         };
         
@@ -101,6 +102,7 @@ public class UsuariosPage extends BasePage {
     				@Override
     				protected void onUpdate(AjaxRequestTarget target) {
     					daoService.setDedicacion(usuario, Integer.parseInt(dedicacionTextField.getInput()));
+    					usuario.setDedicacion(dedicacionTextField.getModelObject());
     				}
 
 					@Override
@@ -117,13 +119,14 @@ public class UsuariosPage extends BasePage {
             	
             	/*PERFIL-ROL*/
             	
-            	final DropDownChoice<String> dropDownPerfil = new DropDownChoice<String>("dropDownPerfil", Model.of(usuario.getPerfil().getNombreLogin()), UsuariosPage.this.lstNombresPerfilesModel);
+            	final DropDownChoice<Usuario> dropDownPerfil = new DropDownChoice<Usuario>("dropDownPerfil", Model.of(usuario.getPerfil()), UsuariosPage.this.lstPerfilesModel);
             	            	
             	dropDownPerfil.add(new AjaxFormComponentUpdatingBehavior("onchange") {
 
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
 						daoService.cambiarPerfil(usuario, dropDownPerfil.getModelObject());
+						usuario.setPerfil(dropDownPerfil.getModelObject());
 					}
             		
             	});
@@ -142,6 +145,7 @@ public class UsuariosPage extends BasePage {
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
 						daoService.cambiarGrupo(usuario, dropDownGrupo.getModelObject());
+						usuario.setGrupo(dropDownGrupo.getModelObject());
 					}
             		
             	});

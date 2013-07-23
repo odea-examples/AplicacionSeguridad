@@ -105,7 +105,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public void modificarUsuario(Usuario usuario) {
 		
-		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U'", usuario.getNombreLogin());
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U' AND u_id = ?", usuario.getNombreLogin(), usuario.getIdUsuario());
 		
 		if (cantidad.equals(1)) {
 			throw new RuntimeException("El nombre de login ya está en uso. Por favor elija otro.");
@@ -152,7 +152,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public void modificarPerfil(Usuario perfil) {
 		
-		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_name = ? AND u_tipo = 'P'", perfil.getNombre());
+		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_name = ? AND u_tipo = 'P' AND u_id != ?", perfil.getNombre(), perfil.getIdUsuario());
 		
 		if (cantidad.equals(1)) {
 			throw new RuntimeException("El nombre ya está en uso. Por favor elija otro.");

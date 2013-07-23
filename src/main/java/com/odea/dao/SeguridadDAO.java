@@ -132,13 +132,11 @@ public void cambiarGrupo(Usuario usuario, String grupo) {
 		
 	}
 	
-	public void cambiarPerfil(Usuario usuario, String nombrePerfil) {
-
-		int perfilID = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ? AND u_tipo = 'P'", nombrePerfil);
+	public void cambiarPerfil(Usuario usuario, Usuario perfil) {
 		
 		String sql = "UPDATE SEC_ASIG_PERFIL SET SEC_PERFIL_ID = ? WHERE SEC_USUARIO_ID = ?";
 		
-		jdbcTemplate.update(sql, perfilID, usuario.getIdUsuario());
+		jdbcTemplate.update(sql, perfil.getIdUsuario(), usuario.getIdUsuario());
 		
 		logger.debug("CAMBIO DE ROL REALIZADO");
 	}

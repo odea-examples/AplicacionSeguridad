@@ -63,8 +63,8 @@ public class DAOService {
 		usuarioDAO.setDedicacion(usuario, dedicacion);
 	}
 
-	public void cambiarPerfil(Usuario usuario, String nombrePerfil) {
-		seguridadDAO.cambiarPerfil(usuario, nombrePerfil);
+	public void cambiarPerfil(Usuario usuario, Usuario perfil) {
+		seguridadDAO.cambiarPerfil(usuario, perfil);
 	}
 	
 	public void cambiarGrupo(Usuario usuario, String grupo) {
