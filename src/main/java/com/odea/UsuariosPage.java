@@ -105,8 +105,9 @@ public class UsuariosPage extends BasePage {
 
 					@Override
     				protected void onUpdate(AjaxRequestTarget target) {
-    					daoService.setDedicacion(usuario, Integer.parseInt(dedicacionTextField.getInput()));
-    					usuario.setDedicacion(dedicacionTextField.getModelObject());
+						Integer dedicacion = Integer.parseInt(dedicacionTextField.getInput());
+    					daoService.setDedicacion(usuario, dedicacion);
+    					target.add(UsuariosPage.this.listViewContainer);
     				}
 
 					@Override
@@ -124,7 +125,7 @@ public class UsuariosPage extends BasePage {
             	/*PERFIL-ROL*/
             	
             	final DropDownChoice<Usuario> dropDownPerfil = new DropDownChoice<Usuario>("dropDownPerfil", Model.of(usuario.getPerfil()), UsuariosPage.this.lstPerfilesModel);
-            	            	
+            	
             	dropDownPerfil.add(new AjaxFormComponentUpdatingBehavior("onchange") {
 
 					private static final long serialVersionUID = 1L;
@@ -132,7 +133,7 @@ public class UsuariosPage extends BasePage {
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
 						daoService.cambiarPerfil(usuario, dropDownPerfil.getModelObject());
-						usuario.setPerfil(dropDownPerfil.getModelObject());
+						target.add(UsuariosPage.this.listViewContainer);
 					}
             		
             	});
@@ -150,8 +151,8 @@ public class UsuariosPage extends BasePage {
 
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
-						daoService.cambiarGrupo(usuario, dropDownGrupo.getModelObject());
-						usuario.setGrupo(dropDownGrupo.getModelObject());
+						UsuariosPage.this.daoService.cambiarGrupo(usuario, dropDownGrupo.getModelObject());
+						target.add(UsuariosPage.this.listViewContainer);
 					}
             		
             	});

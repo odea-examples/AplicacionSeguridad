@@ -27,6 +27,8 @@ public class EditarUsuarioPage extends BasePage {
 	@SpringBean
 	private DAOService daoService;
 	
+	
+	//Alta
 	public EditarUsuarioPage () {
 		
 		Usuario usuario = new Usuario();
@@ -40,7 +42,7 @@ public class EditarUsuarioPage extends BasePage {
 		
 	}
 	
-	
+	//Modificacion
 	public EditarUsuarioPage (final PageParameters parameters) {
 		
 		Usuario usuario = new Usuario();
@@ -128,7 +130,7 @@ public class EditarUsuarioPage extends BasePage {
 				Usuario usuario = (Usuario) form.getModelObject();
 				
 				try {
-					insertarUsuario(usuario);
+					EditarUsuarioPage.this.insertarUsuario(usuario);
 					this.setResponsePage(UsuariosPage.class);					
 				} catch (Exception ex) {
 					this.error(ex.getMessage());

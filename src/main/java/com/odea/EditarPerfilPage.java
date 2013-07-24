@@ -60,9 +60,14 @@ public class EditarPerfilPage extends BasePage {
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				
-				Usuario perfil = (Usuario)form.getModelObject();
-				insertarPerfil(perfil);
-				setResponsePage(PerfilesPage.class);
+				try {
+					Usuario perfil = (Usuario)form.getModelObject();
+					EditarPerfilPage.this.insertarPerfil(perfil);					
+					setResponsePage(PerfilesPage.class);
+					
+				} catch (Exception ex) {
+					error(ex.getMessage());
+				} 
 				
 			}
 

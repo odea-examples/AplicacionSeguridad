@@ -30,7 +30,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public List<Usuario> getUsuariosConPerfiles() {
 		
-		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_name, p.u_login FROM users u, SEC_ASIG_PERFIL ap, users p WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id ORDER BY u.u_name ASC", new RowMapperUsuario2());
+		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login FROM users u, SEC_ASIG_PERFIL ap, users p WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id ORDER BY u.u_name ASC", new RowMapperUsuarioConPerfil());
 		
 		return usuarios;
 	}
@@ -82,7 +82,7 @@ public class UsuarioDAO extends AbstractDAO {
 		
 		Integer idUsuario = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ?", usuario.getNombre());
 		Integer idPerfil = usuario.getPerfil().getIdUsuario();
-
+		
 		String sqlDedicacion = "INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)";
 		jdbcTemplate.update(sqlDedicacion, idUsuario, new Date(), usuario.getDedicacion());
 				
@@ -182,11 +182,17 @@ public class UsuarioDAO extends AbstractDAO {
 		
 	}
 	
-	private class RowMapperUsuario2 implements RowMapper<Usuario>{
+	private class RowMapperUsuarioConPerfil implements RowMapper<Usuario>{
 
 		@Override
 		public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Usuario perfil = new Usuario(0, rs.getString(7), rs.getString(8), "PasswordNula");
+			
+			Usuario perfil = new Usuario();
+			perfil.setIdUsuario(rs.getInt(7));
+			perfil.setNombre(rs.getString(8));
+			perfil.setNombreLogin(rs.getString(9));
+			
+			
 			Usuario usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), (rs.getInt(5) == 1), perfil);
 			usuario.setGrupo(rs.getString(6));
 			

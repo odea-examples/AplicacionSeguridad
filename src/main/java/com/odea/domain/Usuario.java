@@ -120,5 +120,11 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return this.nombreLogin;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.nombreLogin.equals(obj.toString());
+	}
+	
 	
 }

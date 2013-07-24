@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -47,7 +48,11 @@ public class PerfilesPage extends BasePage {
         BookmarkablePageLink<EditarPerfilPage> linkAltaPerfil = new BookmarkablePageLink<EditarPerfilPage>("linkAltaPerfil", EditarPerfilPage.class);
 		this.add(linkAltaPerfil);
         
-        
+        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackPanel");
+        feedbackPanel.setOutputMarkupId(true);
+        this.add(feedbackPanel);
+		
+		
 		this.listViewContainer = new WebMarkupContainer("listViewContainer");
 		this.listViewContainer.setOutputMarkupId(true);
 		
@@ -82,8 +87,15 @@ public class PerfilesPage extends BasePage {
 
 					@Override
                     public void onClick(AjaxRequestTarget ajaxRequestTarget) {
-						PerfilesPage.this.daoService.bajaPerfil(this.getModelObject());
-                        ajaxRequestTarget.add(PerfilesPage.this.listViewContainer);
+						try {
+							PerfilesPage.this.daoService.bajaPerfil(this.getModelObject());							
+							ajaxRequestTarget.add(PerfilesPage.this.listViewContainer);
+							
+						} catch (Exception ex) {
+							error(ex.getMessage());
+						} finally {
+							ajaxRequestTarget.add(feedbackPanel);
+						}
                     }
                     
                 };
