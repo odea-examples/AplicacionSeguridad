@@ -3,12 +3,13 @@ package com.odea.domain;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	private int idUsuario;
 	private String nombreLogin;
 	private String password;
 	private String nombre;
-	private Boolean esCoManager;
 	private Usuario perfil;
 	private String grupo;
 	private Integer dedicacion;
@@ -17,48 +18,7 @@ public class Usuario implements Serializable {
 		
 	}
 	
-	public Usuario(int id, String nombreLogin, String password, String nombre, Boolean coManager, Usuario perfil) {
-		this.idUsuario = id;
-		this.nombreLogin = nombreLogin;
-		this.password = password;
-		this.nombre = nombre;
-		this.esCoManager = coManager;
-		this.perfil = perfil;
-	}
-	
-	public Usuario(int id, String nombreLogin, String password,String nombre,Boolean coManager) {
-		this.idUsuario = id;
-		this.nombreLogin = nombreLogin;
-		this.password = password;
-		this.nombre = nombre;
-		this.esCoManager = coManager;
-	}
 
-	public Usuario(int id, String nombre, String password) {
-		this.idUsuario = id;
-		this.nombreLogin = nombre;
-		this.password = password;
-		this.nombre = "default";
-		this.esCoManager = false;
-	}
-	
-	public Usuario(int id, String nombre, String login, String password) {
-		this.idUsuario = id;
-		this.nombreLogin = login;
-		this.password = password;
-		this.nombre = nombre;
-		this.esCoManager = false;
-	}
-	
-	
-	public Boolean getEsCoManager() {
-		return esCoManager;
-	}
-	public void setEsCoManager(Boolean esCoManager) {
-		this.esCoManager = esCoManager;
-	}
-	
-	
 	public Usuario(int id){
 		this.idUsuario = id;
 	}

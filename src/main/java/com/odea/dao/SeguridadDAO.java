@@ -148,8 +148,10 @@ public void cambiarGrupo(Usuario usuario, String grupo) {
 		@Override
 		public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
-			Usuario unUsuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3));
-			
+			Usuario unUsuario = new Usuario();
+			unUsuario.setIdUsuario(rs.getInt(1));
+			unUsuario.setNombre(rs.getString(2));
+			unUsuario.setPassword(rs.getString(3));
 			unUsuario.setNombre(rs.getString(4));
 			
 			return unUsuario;

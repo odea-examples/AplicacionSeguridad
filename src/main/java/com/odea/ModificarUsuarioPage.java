@@ -132,10 +132,11 @@ public class ModificarUsuarioPage extends BasePage {
 			
 			@Override
 			public void validate(IValidatable<String> validatable) {
+				
 				Boolean correcto = daoService.validarPassword(ModificarUsuarioPage.this.loginActual, validatable.getValue());
 				
 				if (!correcto) {
-					error(validatable, "La password ingresada en 'Password actual' no es correcta");
+					error(validatable, "La password ingresada en 'Password actual' no es correcta.");
 				}
 				
 			}
@@ -148,11 +149,12 @@ public class ModificarUsuarioPage extends BasePage {
 			}
 		});
 		
-		final PasswordTextField password = new PasswordTextField("password");
+		final PasswordTextField password = new PasswordTextField("password", new Model<String>());
 		password.setLabel(Model.of("Password"));
 		password.add(new StringValidator(0, 30));
-		password.setRequired(true);
+		password.setRequired(true);		
 		form.add(password);
+		
 		
 		PasswordTextField passConfirmacion = new PasswordTextField("contraseniaConfirmacion", new Model<String>(new String()));
 		passConfirmacion.setLabel(Model.of("Confirmación de password"));
@@ -167,7 +169,7 @@ public class ModificarUsuarioPage extends BasePage {
 			public void validate(IValidatable<String> validatable) {
 				
 				if (!validatable.getValue().equals(password.getValue())) {
-					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimación de password' deben ser iguales");
+					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimación de password' deben ser iguales.");
 				}
 			}
 			

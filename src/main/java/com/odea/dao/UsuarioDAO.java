@@ -20,9 +20,9 @@ public class UsuarioDAO extends AbstractDAO {
 	
     private static final Logger logger = LoggerFactory.getLogger(UsuarioDAO.class);
 		
-	public Usuario getUsuario(String nombre, String password){
-		Usuario usuario = jdbcTemplate.queryForObject("SELECT u_id, u_login, u_password FROM users WHERE u_login=? AND u_password=password(?)", 
-				new RowMapperUsuario(), nombre, password);
+	public Usuario getUsuario(String login, String password){
+		Usuario usuario = jdbcTemplate.queryForObject("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login, d.dedicacion FROM users u, SEC_ASIG_PERFIL ap, users p, dedicacion_usuario d  WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id AND d.usuario_id = u.u_id AND d.fecha_hasta IS NULL AND u.u_login = ? AND u.u_password = password(?)", 
+				new RowMapperUsuario(), login, password);
 		
 		return usuario;
 	}
@@ -30,37 +30,18 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public List<Usuario> getUsuariosConPerfiles() {
 		
-		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login FROM users u, SEC_ASIG_PERFIL ap, users p WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id ORDER BY u.u_name ASC", new RowMapperUsuarioConPerfil());
+		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login, d.dedicacion FROM users u, SEC_ASIG_PERFIL ap, users p, dedicacion_usuario d WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id AND d.usuario_id = u.u_id AND d.fecha_hasta IS NULL ORDER BY u.u_name ASC", new RowMapperUsuario());
 		
 		return usuarios;
 	}
 	
 	
-	public List<String> getNombresPerfiles() {
-		List<String> nombresPerfiles = jdbcTemplate.query("SELECT u_name FROM users WHERE u_tipo = 'P' ORDER BY u_name ASC", new RowMapper<String>() {
-
-			@Override
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString(1);
-			}
-			
-		});
-		
-		return nombresPerfiles;
-	}
-	
-	public Integer getDedicacion(Usuario usuario){
-		return jdbcTemplate.queryForInt("SELECT dedicacion FROM dedicacion_usuario WHERE usuario_id=? AND fecha_hasta is NULL", usuario.getIdUsuario());
-	}
-	
-	public void setDedicacion(Usuario usuario, int dedicacion){
+	public void setDedicacion(Usuario usuario, Integer dedicacion){
 		Date fechaActual = new Date();
-		try {
-			jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta=? WHERE fecha_hasta is NULL AND usuario_id=?", fechaActual, usuario.getIdUsuario());
-			jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), fechaActual, dedicacion);						
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
+		
+		jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta=? WHERE fecha_hasta is NULL AND usuario_id=?", fechaActual, usuario.getIdUsuario());
+		jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), fechaActual, dedicacion);						
+
 	}
 	
 	public List<Usuario> getPerfiles() {
@@ -183,17 +164,8 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	
 	//RowMappers
-	
-	private class RowMapperUsuario implements RowMapper<Usuario>{
-
-		@Override
-		public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3));
-		}
 		
-	}
-	
-	private class RowMapperUsuarioConPerfil implements RowMapper<Usuario>{
+	private class RowMapperUsuario implements RowMapper<Usuario>{
 
 		@Override
 		public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -203,9 +175,14 @@ public class UsuarioDAO extends AbstractDAO {
 			perfil.setNombre(rs.getString(8));
 			perfil.setNombreLogin(rs.getString(9));
 			
-			
-			Usuario usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), (rs.getInt(5) == 1), perfil);
+			Usuario usuario = new Usuario();
+			usuario.setIdUsuario(rs.getInt(1));
+			usuario.setNombreLogin(rs.getString(2));
+			usuario.setPassword(rs.getString(3));
+			usuario.setNombre(rs.getString(4));
 			usuario.setGrupo(rs.getString(6));
+			usuario.setDedicacion(rs.getInt(10));
+			usuario.setPerfil(perfil);
 			
 			return usuario;
 		}

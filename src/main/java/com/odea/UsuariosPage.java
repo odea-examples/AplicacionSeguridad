@@ -96,7 +96,7 @@ public class UsuariosPage extends BasePage {
             	
             	/*DEDICACION*/
             	
-            	final RequiredTextField<Integer> dedicacionTextField = new RequiredTextField<Integer>("dedicacion", new Model<Integer>(daoService.getDedicacion(usuario)));
+            	final RequiredTextField<Integer> dedicacionTextField = new RequiredTextField<Integer>("dedicacion", new Model<Integer>(usuario.getDedicacion()));
             	dedicacionTextField.add(new OnlyNumberBehavior(dedicacionTextField.getMarkupId()));
             	
             	dedicacionTextField.add(new AjaxFormComponentUpdatingBehavior("onchange") {
@@ -161,7 +161,7 @@ public class UsuariosPage extends BasePage {
             	item.add(dropDownGrupo);
             	
             	
-            	BookmarkablePageLink<ModificarUsuarioPage> botonModificarUsuario = new BookmarkablePageLink<ModificarUsuarioPage>("modifyLink", ModificarUsuarioPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("nombreUsuario", usuario.getNombre()).add("loginUsuario", usuario.getNombreLogin()).add("grupoDelUsuario", usuario.getGrupo()).add("perfilUsuario", usuario.getPerfil().getNombre()).add("dedicacionUsuario", daoService.getDedicacion(usuario)));
+            	BookmarkablePageLink<ModificarUsuarioPage> botonModificarUsuario = new BookmarkablePageLink<ModificarUsuarioPage>("modifyLink", ModificarUsuarioPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("nombreUsuario", usuario.getNombre()).add("loginUsuario", usuario.getNombreLogin()).add("grupoDelUsuario", usuario.getGrupo()).add("perfilUsuario", usuario.getPerfil().getNombre()).add("dedicacionUsuario", usuario.getDedicacion()));
             	
             	item.add(botonModificarUsuario);
             	

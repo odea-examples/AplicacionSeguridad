@@ -51,14 +51,6 @@ public class DAOService {
 		return usuarioDAO.getUsuariosConPerfiles();
 	} 
 	
-	public List<String> getNombresPerfiles() {
-		return usuarioDAO.getNombresPerfiles();
-	}
-	
-	public Integer getDedicacion(Usuario usuario) {
-		return usuarioDAO.getDedicacion(usuario);
-	}
-	
 	public void setDedicacion(Usuario usuario, Integer dedicacion) {
 		usuarioDAO.setDedicacion(usuario, dedicacion);
 	}
