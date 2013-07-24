@@ -70,7 +70,7 @@ public class UsuariosPage extends BasePage {
             }
         };
         
-        BookmarkablePageLink<EditarUsuarioPage> linkAltaUsuario = new BookmarkablePageLink<EditarUsuarioPage>("linkAltaUsuario", EditarUsuarioPage.class);
+        BookmarkablePageLink<AltaUsuarioPage> linkAltaUsuario = new BookmarkablePageLink<AltaUsuarioPage>("linkAltaUsuario", AltaUsuarioPage.class);
 		this.add(linkAltaUsuario);
         
 		this.listViewContainer = new WebMarkupContainer("listViewContainer");
@@ -161,7 +161,7 @@ public class UsuariosPage extends BasePage {
             	item.add(dropDownGrupo);
             	
             	
-            	BookmarkablePageLink<EditarUsuarioPage> botonModificarUsuario = new BookmarkablePageLink<EditarUsuarioPage>("modifyLink", EditarUsuarioPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("nombreUsuario", usuario.getNombre()).add("loginUsuario", usuario.getNombreLogin()).add("grupoDelUsuario", usuario.getGrupo()).add("perfilUsuario", usuario.getPerfil().getNombre()).add("dedicacionUsuario", daoService.getDedicacion(usuario)));
+            	BookmarkablePageLink<ModificarUsuarioPage> botonModificarUsuario = new BookmarkablePageLink<ModificarUsuarioPage>("modifyLink", ModificarUsuarioPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("nombreUsuario", usuario.getNombre()).add("loginUsuario", usuario.getNombreLogin()).add("grupoDelUsuario", usuario.getGrupo()).add("perfilUsuario", usuario.getPerfil().getNombre()).add("dedicacionUsuario", daoService.getDedicacion(usuario)));
             	
             	item.add(botonModificarUsuario);
             	

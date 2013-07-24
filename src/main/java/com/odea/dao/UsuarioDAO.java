@@ -70,7 +70,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	
 	public void altaUsuario(Usuario usuario) {
-		
+	
 		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U'", usuario.getNombreLogin());
 		
 		if (cantidad.equals(1)) {
@@ -104,14 +104,8 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	
 	public void modificarUsuario(Usuario usuario) {
-		
-		Integer cantidad = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U' AND u_id != ?", usuario.getNombreLogin(), usuario.getIdUsuario());
-		
-		if (cantidad.equals(1)) {
-			throw new RuntimeException("El nombre de login ya está en uso. Por favor elija otro.");
-		}
-		
-		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ?, u_password = ?, u_grupo = ? WHERE u_tipo = 'U' AND u_id = ?", usuario.getNombre(), usuario.getNombre(), usuario.getPassword(), usuario.getGrupo(), usuario.getIdUsuario());
+
+		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ?, u_password = password(?), u_grupo = ? WHERE u_tipo = 'U' AND u_id = ?", usuario.getNombre(), usuario.getNombreLogin(), usuario.getPassword(), usuario.getGrupo(), usuario.getIdUsuario());
 		
 		jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta = ? WHERE fecha_hasta is NULL AND usuario_id = ?", new Date(), usuario.getIdUsuario());
 		jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), new Date(), usuario.getDedicacion());
@@ -170,6 +164,23 @@ public class UsuarioDAO extends AbstractDAO {
 		return perfil;
 	}
 	
+	public Boolean validarPassword(String login, String password) {
+		Integer cantidadContrasenia = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_password = password(?) AND u_tipo = 'U'", login, password);
+		
+		Boolean resultado = cantidadContrasenia.equals(1); 
+		
+		return resultado;
+		
+	}
+	
+	public Boolean validarLogin(Integer id, String login) {
+		Integer usuariosConMismoLogin = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_tipo = 'U' AND u_id != ?", login, id);
+		
+		Boolean resultado = usuariosConMismoLogin.equals(0);
+		
+		return resultado;
+	}
+	
 	
 	//RowMappers
 	
@@ -215,6 +226,8 @@ public class UsuarioDAO extends AbstractDAO {
 		}
 		
 	}
+
+
 
 	
 

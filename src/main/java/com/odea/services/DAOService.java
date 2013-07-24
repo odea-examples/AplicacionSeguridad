@@ -103,6 +103,14 @@ public class DAOService {
 		return usuarioDAO.getPerfilDeNombre(nombre);
 	}
 	
+	public Boolean validarPassword(String login, String password) {
+		return usuarioDAO.validarPassword(login, password);
+	}
+	
+	public Boolean validarLogin(Integer id, String login) {
+		return usuarioDAO.validarLogin(id, login);
+	}
+	
 	public List<String> getGrupos() {
 		/*Temporalmente hardcodeado ya que no hay tabla de Grupos en el modelo de datos*/
 		
@@ -115,6 +123,9 @@ public class DAOService {
 		
 		return grupos;
 	}
+
+
+
 
 
 
