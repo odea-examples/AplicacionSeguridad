@@ -80,7 +80,7 @@ public class UsuarioDAO extends AbstractDAO {
 		String sqlUsuario = "INSERT INTO users (u_name, u_login, u_password, u_grupo, u_tipo) VALUES (?, ?, password(?), ?, 'U')";
 		jdbcTemplate.update(sqlUsuario, usuario.getNombre(), usuario.getNombreLogin(), usuario.getPassword(), usuario.getGrupo());
 		
-		Integer idUsuario = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ?", usuario.getNombre());
+		Integer idUsuario = jdbcTemplate.queryForInt("SELECT u_id FROM users WHERE u_login = ?", usuario.getNombreLogin());
 		Integer idPerfil = usuario.getPerfil().getIdUsuario();
 		
 		String sqlDedicacion = "INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)";

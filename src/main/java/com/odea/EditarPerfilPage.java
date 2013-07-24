@@ -4,6 +4,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -42,6 +43,10 @@ public class EditarPerfilPage extends BasePage {
 	
 	protected void preparePage(Usuario perfil) {
 		
+        BookmarkablePageLink<PerfilesPage> linkVolver = new BookmarkablePageLink<PerfilesPage>("linkVolver", PerfilesPage.class);
+        this.add(linkVolver);
+        
+		
 		Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(perfil));
 		this.add(form);
 		
@@ -67,6 +72,7 @@ public class EditarPerfilPage extends BasePage {
 					
 				} catch (Exception ex) {
 					error(ex.getMessage());
+					target.add(feedbackPanel);
 				} 
 				
 			}
