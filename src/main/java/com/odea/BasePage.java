@@ -11,8 +11,10 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class BasePage extends WebPage {
 	
-	public AjaxButton botonLogout;
-	public AjaxButton botonLogin;
+	private static final long serialVersionUID = 1L;
+	
+	private AjaxButton botonLogout;
+	private AjaxButton botonLogin;
 	
 	public BasePage(){
 		super();

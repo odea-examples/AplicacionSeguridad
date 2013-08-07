@@ -26,10 +26,10 @@ public class PerfilesPage extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	@SpringBean
-	public DAOService daoService;
+	private DAOService daoService;
 	
-	public IModel<List<Usuario>> lstPerfilesModel;
-	public WebMarkupContainer listViewContainer;
+	private IModel<List<Usuario>> lstPerfilesModel;
+	private WebMarkupContainer listViewContainer;
 	
 	
 	public PerfilesPage() {

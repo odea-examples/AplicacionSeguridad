@@ -16,23 +16,23 @@
 					<th scope="col"><div wicket:id="tituloDedicacion"/></th>
 					<th scope="col">Rol</th>
 					<th scope="col">Grupo</th>
-					<th scope="col">Modificar</th>
-					<th scope="col">Borrar</th>
+					<th colspan="3">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr wicket:id="usuarios">
 					<td wicket:id="nombreUsuario"/>
-					<td> <input wicket:id="dedicacion" maxlength=1/> </td>
+					<td><input wicket:id="dedicacion" maxlength=1/> </td>
 					<td><select wicket:id="dropDownPerfil"/></td>
 					<td><select wicket:id="dropDownGrupo"/></td>
-					<td><a wicket:id="modifyLink" class="more" href="#"><img src="images/modificarIcon.gif" alt="modificarIcon"/></a></td>
-					<td><a wicket:id="deleteLink" class="more" href="#"><img src="images/delete.png" alt="delete"/></a></td>
+					<td><a wicket:id="modifyLink" class="more" href="#"><img src="images/modificarIcon.gif" alt="modificarIcon" title="Modificar"/></a></td>
+					<td><a wicket:id="passwordLink" class="more" href="#"><img src="images/PasswordIcon.png" alt="PasswordIcon" title="Cambiar Password"/></a></td>
+					<td><a wicket:id="deleteLink" class="more" href="#"><img src="images/delete.png" alt="delete" title="Borrar"/></a></td>
 				</tr>
 			</tbody>
 			<tfoot>
 	            <tr>
-	                <td wicket:id="navigator" align="center" colspan="4" ></td>
+	                <td wicket:id="navigator" align="center" colspan="7"></td>
 	            </tr>
         	</tfoot>
 		</table>

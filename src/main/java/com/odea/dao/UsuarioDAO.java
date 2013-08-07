@@ -86,7 +86,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public void modificarUsuario(Usuario usuario) {
 
-		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ?, u_password = password(?), u_grupo = ? WHERE u_tipo = 'U' AND u_id = ?", usuario.getNombre(), usuario.getNombreLogin(), usuario.getPassword(), usuario.getGrupo(), usuario.getIdUsuario());
+		jdbcTemplate.update("UPDATE users SET u_name = ?, u_login = ?, u_grupo = ? WHERE u_tipo = 'U' AND u_id = ?", usuario.getNombre(), usuario.getNombreLogin(), usuario.getGrupo(), usuario.getIdUsuario());
 		
 		jdbcTemplate.update("UPDATE dedicacion_usuario SET fecha_hasta = ? WHERE fecha_hasta is NULL AND usuario_id = ?", new Date(), usuario.getIdUsuario());
 		jdbcTemplate.update("INSERT INTO dedicacion_usuario (usuario_id, fecha_desde, dedicacion) VALUES (?,?,?)", usuario.getIdUsuario(), new Date(), usuario.getDedicacion());
@@ -145,13 +145,12 @@ public class UsuarioDAO extends AbstractDAO {
 		return perfil;
 	}
 	
-	public Boolean validarPassword(String login, String password) {
-		Integer cantidadContrasenia = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_login = ? AND u_password = password(?) AND u_tipo = 'U'", login, password);
+	public Boolean validarPassword(Usuario usuario, String password) {
+		Integer cantidadContrasenia = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users WHERE u_id = ? AND u_password = password(?) AND u_tipo = 'U'", usuario.getIdUsuario(), password);
 		
 		Boolean resultado = cantidadContrasenia.equals(1); 
 		
-		return resultado;
-		
+		return resultado;	
 	}
 	
 	public Boolean validarLogin(Integer id, String login) {
@@ -160,6 +159,21 @@ public class UsuarioDAO extends AbstractDAO {
 		Boolean resultado = usuariosConMismoLogin.equals(0);
 		
 		return resultado;
+	}
+	
+	public void modificarPasswordUsuario(Usuario usuario) {
+		System.out.println("UPDATE users SET u_password = password("+usuario.getPassword()+") WHERE u_tipo = 'U' AND u_id = " + usuario.getIdUsuario());
+		jdbcTemplate.update("UPDATE users SET u_password = password(?) WHERE u_tipo = 'U' AND u_id = ?", usuario.getPassword(), usuario.getIdUsuario());
+		
+		logger.debug("SE HA CAMBIADO LA PASSWORD DEL USUARIO - ID: " + usuario.getIdUsuario());
+	}
+	
+	
+	public Usuario getUsuario(String username) {
+		
+		Usuario usuario = jdbcTemplate.queryForObject("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login, d.dedicacion FROM users u, SEC_ASIG_PERFIL ap, users p, dedicacion_usuario d  WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id AND d.usuario_id = u.u_id AND d.fecha_hasta IS NULL AND u.u_login = ? AND u.u_tipo = 'U'", new RowMapperUsuario(), username);
+		
+		return usuario;
 	}
 	
 	
@@ -203,10 +217,6 @@ public class UsuarioDAO extends AbstractDAO {
 		}
 		
 	}
-
-
-
-	
 
 	
 }

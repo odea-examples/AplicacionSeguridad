@@ -19,7 +19,7 @@ public class EditarPerfilPage extends BasePage {
 	private static final long serialVersionUID = 1L;
 	
 	@SpringBean
-	protected DAOService daoService;
+	private DAOService daoService;
 
 	public EditarPerfilPage() {
 		
@@ -41,7 +41,7 @@ public class EditarPerfilPage extends BasePage {
 	}
 	
 	
-	protected void preparePage(Usuario perfil) {
+	private void preparePage(Usuario perfil) {
 		
         BookmarkablePageLink<PerfilesPage> linkVolver = new BookmarkablePageLink<PerfilesPage>("linkVolver", PerfilesPage.class);
         this.add(linkVolver);
@@ -88,7 +88,7 @@ public class EditarPerfilPage extends BasePage {
 
 	}
 
-	protected void insertarPerfil(Usuario perfil) {
+	private void insertarPerfil(Usuario perfil) {
 		
 		if (perfil.getIdUsuario() == 0) {
 			this.daoService.altaPerfil(perfil);

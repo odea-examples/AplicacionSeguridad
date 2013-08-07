@@ -120,67 +120,6 @@ public class ModificarUsuarioPage extends BasePage {
 			
 		});
 		
-		
-		
-		final PasswordTextField passActual = new PasswordTextField("contraseniaActual", new Model<String>(new String()));
-		passActual.setLabel(Model.of("Password anterior"));
-		passActual.setRequired(true);
-		form.add(passActual);
-		passActual.add(new StringValidator(0, 30));
-		passActual.add(new IValidator<String>() {
-			private static final long serialVersionUID = 1L;
-			
-			@Override
-			public void validate(IValidatable<String> validatable) {
-				
-				Boolean correcto = daoService.validarPassword(ModificarUsuarioPage.this.loginActual, validatable.getValue());
-				
-				if (!correcto) {
-					error(validatable, "La password ingresada en 'Password actual' no es correcta.");
-				}
-				
-			}
-			
-			private void error(IValidatable<String> validatable, String errorKey) {
-				ValidationError error = new ValidationError();
-				error.addKey(getClass().getSimpleName() + "." + errorKey);
-				error.setMessage(errorKey);
-				validatable.error(error);
-			}
-		});
-		
-		final PasswordTextField password = new PasswordTextField("password", new Model<String>());
-		password.setLabel(Model.of("Password"));
-		password.add(new StringValidator(0, 30));
-		password.setRequired(true);		
-		form.add(password);
-		
-		
-		PasswordTextField passConfirmacion = new PasswordTextField("contraseniaConfirmacion", new Model<String>(new String()));
-		passConfirmacion.setLabel(Model.of("Confirmación de password"));
-		passConfirmacion.setRequired(true);
-		form.add(passConfirmacion);
-		passConfirmacion.add(new StringValidator(0, 30));
-		passConfirmacion.add(new IValidator<String>() {
-			
-			private static final long serialVersionUID = 1L;
-			
-			@Override
-			public void validate(IValidatable<String> validatable) {
-				
-				if (!validatable.getValue().equals(password.getValue())) {
-					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimación de password' deben ser iguales.");
-				}
-			}
-			
-			private void error(IValidatable<String> validatable, String errorKey) {
-				ValidationError error = new ValidationError();
-				error.addKey(getClass().getSimpleName() + "." + errorKey);
-				error.setMessage(errorKey);
-				validatable.error(error);
-			}
-		});
-		
 		RequiredTextField<Integer> dedicacion = new RequiredTextField<Integer>("dedicacion");
 		dedicacion.add(new OnlyNumberBehavior(dedicacion.getMarkupId()));
 		dedicacion.setLabel(Model.of("Dedicación"));

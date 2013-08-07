@@ -34,7 +34,7 @@ public class SeguridadDAO extends AbstractDAO {
 		
 		logger.debug("SE PROCEDE A CAMBIAR LA CONTRASEÑA DEL USUARIO - username: " + username);
 			
-		Integer filasActualizadas = jdbcTemplate.update("UPDATE users SET u_password = password(?) WHERE u_login = ?", password, username);
+		Integer filasActualizadas = jdbcTemplate.update("UPDATE users SET u_password = password(?) WHERE u_login = ? AND u_tipo = 'U'", password, username);
 			
 		
 		if (filasActualizadas.equals(1)) {

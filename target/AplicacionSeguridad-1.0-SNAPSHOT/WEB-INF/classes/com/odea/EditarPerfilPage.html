@@ -1,0 +1,23 @@
+<wicket:extend>
+
+	<h4><a wicket:id="linkVolver" href="#" class="nav">Volver al Listado</a></h4>
+	<br>
+	
+	
+	<h3>Editar un Perfil</h3>
+	<br>
+
+	<form wicket:id="form">			
+	
+		<div wicket:id="feedbackPanel"></div>
+		
+		<div>
+			<b><label for="nombre">Nombre: </label></b> 
+			<input type="text" wicket:id="nombre" name="nombre"/>
+		</div>
+		
+		<br>
+		<input type="submit" wicket:id="submitButton" value="Guardar"/>
+	</form>
+	
+</wicket:extend>

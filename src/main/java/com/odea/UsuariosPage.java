@@ -29,12 +29,12 @@ public class UsuariosPage extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	@SpringBean
-	public DAOService daoService;
+	private DAOService daoService;
 	
-	public IModel<List<Usuario>> lstUsuariosModel;
-	public IModel<List<Usuario>> lstPerfilesModel;
-	public IModel<List<String>> lstGruposModel;
-	public WebMarkupContainer listViewContainer;
+	private IModel<List<Usuario>> lstUsuariosModel;
+	private IModel<List<Usuario>> lstPerfilesModel;
+	private IModel<List<String>> lstGruposModel;
+	private WebMarkupContainer listViewContainer;
 	
 	
 	public UsuariosPage() {
@@ -164,6 +164,11 @@ public class UsuariosPage extends BasePage {
             	BookmarkablePageLink<ModificarUsuarioPage> botonModificarUsuario = new BookmarkablePageLink<ModificarUsuarioPage>("modifyLink", ModificarUsuarioPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("nombreUsuario", usuario.getNombre()).add("loginUsuario", usuario.getNombreLogin()).add("grupoDelUsuario", usuario.getGrupo()).add("perfilUsuario", usuario.getPerfil().getNombre()).add("dedicacionUsuario", usuario.getDedicacion()));
             	
             	item.add(botonModificarUsuario);
+            	
+            	
+            	BookmarkablePageLink<ModificarPasswordPage> botonModificarPassword = new BookmarkablePageLink<ModificarPasswordPage>("passwordLink", ModificarPasswordPage.class, new PageParameters().add("id", usuario.getIdUsuario()));
+            	
+            	item.add(botonModificarPassword);
             	
             	
             	ConfirmationLink<Usuario> botonBajaUsuario = new ConfirmationLink<Usuario>("deleteLink","\\u00BFEst\\xE1 seguro de que desea borrar este usuario?", new Model<Usuario>(usuario)) {

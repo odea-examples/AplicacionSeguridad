@@ -15,10 +15,10 @@ import com.odea.domain.Usuario;
 public class DAOService {
 	
 	@Autowired
-	public transient SeguridadDAO seguridadDAO;
+	private transient SeguridadDAO seguridadDAO;
 	
 	@Autowired
-	public transient UsuarioDAO usuarioDAO;
+	private transient UsuarioDAO usuarioDAO;
 	
 	
 	
@@ -95,12 +95,20 @@ public class DAOService {
 		return usuarioDAO.getPerfilDeNombre(nombre);
 	}
 	
-	public Boolean validarPassword(String login, String password) {
-		return usuarioDAO.validarPassword(login, password);
+	public Boolean validarPassword(Usuario usuario, String password) {
+		return usuarioDAO.validarPassword(usuario, password);
 	}
 	
 	public Boolean validarLogin(Integer id, String login) {
 		return usuarioDAO.validarLogin(id, login);
+	}
+	
+	public void modificarPasswordUsuario(Usuario usuario) {
+		usuarioDAO.modificarPasswordUsuario(usuario);
+	}
+	
+	public Usuario getUsuario(String username) {
+		return usuarioDAO.getUsuario(username);
 	}
 	
 	public List<String> getGrupos() {
@@ -115,12 +123,6 @@ public class DAOService {
 		
 		return grupos;
 	}
-
-
-
-
-
-
 
 	
 }

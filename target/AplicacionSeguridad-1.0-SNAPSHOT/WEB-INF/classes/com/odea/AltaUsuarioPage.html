@@ -1,0 +1,62 @@
+<wicket:extend>
+		
+	<h4><a wicket:id="linkVolver" href="#" class="nav">Volver al Listado</a></h4>
+	<br>
+		
+	<h3>Alta de un Nuevo Usuario</h3>
+	<br>
+		
+	<form wicket:id="form">
+		
+		<div>
+			<span wicket:id="feedbackPanel"></span>
+		</div>
+				
+		<br>
+		
+		<div>
+			<b><label for="nombre">Nombre: </label></b>
+			<input type="text" wicket:id="nombre" name="nombre">
+		</div>
+		
+		<br>
+		
+		<div>
+			<b><label for="nombreLogin">Login: </label></b>
+			<input type="text" wicket:id="nombreLogin" name="nombreLogin">
+		</div>
+		
+		<br>
+		
+		<div>
+			<b><label for="password">Password: </label></b>
+			<input type="password" wicket:id="password" name="password">
+		</div>
+		
+		<br>
+		
+		<div>
+			<b><label for="dedicacion">Dedicaci&oacute;n: </label></b>
+			<input type="text" maxlength=1 wicket:id="dedicacion" name="dedicacion">
+		</div>
+		
+		<br>
+		
+		<div>
+			<b><label for="perfil">Perfil: </label></b>
+			<select wicket:id="perfil" name="perfil"></select>
+			
+			<b><label for="grupo">Grupo: </label></b>
+			<select wicket:id="grupo" name="grupo"></select>
+		</div>
+		
+		<br>
+		
+		<div>
+			<input wicket:id="submit" value="Guardar" type="submit"/>
+		</div>
+		
+		
+	</form>
+		
+</wicket:extend>

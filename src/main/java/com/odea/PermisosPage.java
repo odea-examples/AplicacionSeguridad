@@ -35,10 +35,10 @@ public class PermisosPage extends BasePage {
 	private static final long serialVersionUID = 1L;
 
 	@SpringBean
-	public DAOService daoService;
+	private DAOService daoService;
 	
-	public IModel<List<Usuario>> lstPerfilesModel;
-	public IModel<List<Funcionalidad>> lstFuncionalidadesModel;
+	private IModel<List<Usuario>> lstPerfilesModel;
+	private IModel<List<Funcionalidad>> lstFuncionalidadesModel;
 	
 	
 	public PermisosPage() {

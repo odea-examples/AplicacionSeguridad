@@ -35,6 +35,7 @@ public class WicketApplication extends WebApplication
         this.mountPage("UsuariosPage", UsuariosPage.class);
         this.mountPage("AltaUsuarioPage", AltaUsuarioPage.class);
         this.mountPage("ModificarUsuarioPage", ModificarUsuarioPage.class);
+        this.mountPage("ModificarPasswordPage", ModificarPasswordPage.class);
         
         this.mountPage("PerfilesPage", PerfilesPage.class);
         this.mountPage("EditarPerfilPage", EditarPerfilPage.class);
