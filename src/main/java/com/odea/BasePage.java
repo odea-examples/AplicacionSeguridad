@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
@@ -12,70 +13,47 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 public class BasePage extends WebPage {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private AjaxButton botonLogout;
-	private AjaxButton botonLogin;
+		
 	
 	public BasePage(){
-		super();
-		this.preparePage();
-	}
-	
-	public BasePage(PageParameters parameters){
-		super(parameters);
-		this.preparePage();
-	}
-	private void preparePage(){
 		
-		
-	    BaseForm form = new BaseForm("formLogout") {
+	    Form form = new Form("formLogout");
+	    this.add(form);	
+	    
+		AjaxButton botonLogout = new AjaxButton("botonLogout") {
 			@Override
-			protected void onSubmit(AjaxRequestTarget target, BaseForm form) {
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				SecurityUtils.getSubject().logout();
 				setResponsePage(LoginPage.class);
 			}
-		};  
-		add(form);
-	    if (!SecurityUtils.getSubject().isAuthenticated()){
-	    	botonLogout.add(new AttributeModifier("style", new Model("display:none")));
-	    }
-	    else{
-	    	botonLogin.add(new AttributeModifier("style", new Model("display:none")));
-	    }
+			
+		};
+
+		form.add(botonLogout);
+				
+		WebMarkupContainer permisosPage = this.armarWmc("PermisosPage");
+		WebMarkupContainer usuariosPage = this.armarWmc("UsuariosPage");
+		WebMarkupContainer perfilesPage = this.armarWmc("PerfilesPage");
+		WebMarkupContainer passwordPage = this.armarWmc("PasswordPage");
+
+		form.add(permisosPage);
+		form.add(usuariosPage);
+		form.add(perfilesPage);
+		form.add(passwordPage);
+
 	}
-	public abstract class BaseForm extends Form {
-
-		public BaseForm(String id) {
-			
-			super(id);
-			this.setOutputMarkupId(true);
-			
-			botonLogin = new AjaxButton("login") {
-				@Override
-				protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-					BaseForm.this.onSubmit(target, (BaseForm) form);
-				}
-				
-			};
-			
-			botonLogout = new AjaxButton("logout") {
-				@Override
-				protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-					BaseForm.this.onSubmit(target, (BaseForm) form);
-				}
-				
-			};
-			
 	
-			
-			add(botonLogin);
-			add(botonLogout);	
-			
-		}
-
-		protected abstract void onSubmit(AjaxRequestTarget target, BaseForm form);
+	private WebMarkupContainer armarWmc(String idWmc) {
 		
+		String page = this.getRequest().getUrl().toString();
+		
+		WebMarkupContainer wmc = new WebMarkupContainer(idWmc);
+		
+		if((page.equals(idWmc))){
+			wmc.add(new AttributeModifier("class","current"));
 		}
+		
+		return wmc;
+	}
+	
 }
-
-
