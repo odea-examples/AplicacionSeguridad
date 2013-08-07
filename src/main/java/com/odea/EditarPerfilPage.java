@@ -55,7 +55,7 @@ public class EditarPerfilPage extends BasePage {
 		form.add(feedbackPanel);
 		
 		RequiredTextField<String> nombre = new RequiredTextField<String>("nombre");
-		nombre.setLabel(Model.of("nombre"));
+		nombre.setLabel(Model.of("Nombre"));
 		form.add(nombre);
 		
 		AjaxButton submit = new AjaxButton("submitButton") {

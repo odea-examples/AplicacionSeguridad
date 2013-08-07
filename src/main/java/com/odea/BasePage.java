@@ -20,7 +20,11 @@ public class BasePage extends WebPage {
 	    Form form = new Form("formLogout");
 	    this.add(form);	
 	    
+	    
 		AjaxButton botonLogout = new AjaxButton("botonLogout") {
+
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				SecurityUtils.getSubject().logout();
