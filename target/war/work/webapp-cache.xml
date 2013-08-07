@@ -8,6 +8,7 @@
           <string>images/LOGO.gif</string>
           <string>images/menu.gif</string>
           <string>images/webdesign.png</string>
+          <string>images/menuhover.gif</string>
           <string>images/spacer.gif</string>
           <string>images/PasswordIcon.png</string>
           <string>images/note.png</string>
@@ -76,7 +77,6 @@
           <string>WEB-INF/classes/com/odea/shiro/ShiroConstraint.class</string>
           <string>WEB-INF/classes/com/odea/shiro/ShiroUnauthorizedComponentListener.class</string>
           <string>WEB-INF/classes/com/odea/ModificarUsuarioPage$3.class</string>
-          <string>WEB-INF/classes/com/odea/BasePage$BaseForm$2.class</string>
           <string>WEB-INF/classes/com/odea/PermisosPage.html</string>
           <string>WEB-INF/classes/com/odea/EditarPerfilPage.class</string>
           <string>WEB-INF/classes/com/odea/ModificarUsuarioPage.html</string>
@@ -106,9 +106,7 @@
           <string>WEB-INF/classes/com/odea/PermisosPage$3.class</string>
           <string>WEB-INF/classes/com/odea/UsuariosPage$1.class</string>
           <string>WEB-INF/classes/com/odea/LoginPage$LoginForm$1.class</string>
-          <string>WEB-INF/classes/com/odea/BasePage$BaseForm.class</string>
           <string>WEB-INF/classes/com/odea/AltaUsuarioPage.html</string>
-          <string>WEB-INF/classes/com/odea/BasePage$BaseForm$1.class</string>
           <string>WEB-INF/classes/com/odea/PerfilesPage$2.class</string>
           <string>WEB-INF/classes/com/odea/ModificarUsuarioPage$4.class</string>
           <string>WEB-INF/classes/com/odea/UsuariosPage.class</string>

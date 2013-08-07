@@ -49,34 +49,6 @@ public class ModificarPasswordPage extends BasePage {
 		feedbackPanel.setOutputMarkupId(true);
 		form.add(feedbackPanel);
 		
-/*		
-		final PasswordTextField passActual = new PasswordTextField("contraseniaActual", new Model<String>(new String()));
-		passActual.setLabel(Model.of("Password anterior"));
-		passActual.setRequired(true);
-		form.add(passActual);
-		passActual.add(new StringValidator(0, 30));
-		passActual.add(new IValidator<String>() {
-			private static final long serialVersionUID = 1L;
-			
-			@Override
-			public void validate(IValidatable<String> validatable) {
-				
-				Boolean correcto = daoService.validarPassword(form.getModelObject(), validatable.getValue());
-				
-				if (!correcto) {
-					error(validatable, "La password ingresada en 'Password actual' no es correcta.");
-				}
-				
-			}
-			
-			private void error(IValidatable<String> validatable, String errorKey) {
-				ValidationError error = new ValidationError();
-				error.addKey(getClass().getSimpleName() + "." + errorKey);
-				error.setMessage(errorKey);
-				validatable.error(error);
-			}
-		});
-	*/	
 		
 		final PasswordTextField password = new PasswordTextField("password");
 		password.setLabel(Model.of("Password"));
@@ -86,7 +58,7 @@ public class ModificarPasswordPage extends BasePage {
 		
 		
 		PasswordTextField passConfirmacion = new PasswordTextField("contraseniaConfirmacion", new Model<String>(new String()));
-		passConfirmacion.setLabel(Model.of("Confirmación de password"));
+		passConfirmacion.setLabel(Model.of("Confirmación"));
 		passConfirmacion.setRequired(true);
 		form.add(passConfirmacion);
 		passConfirmacion.add(new StringValidator(0, 30));
