@@ -1,13 +1,3 @@
-<wicket:head>
-	
-	<style>
-		select { padding-left: 5px; padding-right: 5px; }
-	</style>
-
-	<link href="styles/tables.css" rel="stylesheet" type="text/css" />
-	
-</wicket:head>
-
 <wicket:extend>
 
 	<h4><a wicket:id="linkAltaUsuario" href="#" class="nav">Agregar un nuevo usuario</a></h4>
@@ -28,7 +18,7 @@
 			<tbody>
 				<tr wicket:id="usuarios">
 					<td wicket:id="nombreUsuario"/>
-					<td><input wicket:id="dedicacion" maxlength=1 style="text-align:right; width:100px;"/> </td>
+					<td><input wicket:id="dedicacion" class="numeric"  maxlength=1/> </td>
 					<td><select wicket:id="dropDownPerfil"/></td>
 					<td><select wicket:id="dropDownGrupo"/></td>
 					<td><a wicket:id="modifyLink" class="more" href="#"><img src="images/modificarIcon.gif" alt="modificarIcon" title="Modificar"/></a></td>

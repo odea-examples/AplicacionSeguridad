@@ -1,9 +1,7 @@
 <wicket:head>
 	
 	<style type='text/css'>
-		label { width: 75px; display: inline-block;}
-		input[type=text] { width: 200px }
-		input[type=password] { width: 200px; }
+		label { width: 75px; display: inline-block;}		
 		select { width: 150px; }	
 	</style>
 	
@@ -24,14 +22,14 @@
 		<p>
 			<div>
 				<b><label for="nombre">Nombre: </label></b>
-				<input type="text" wicket:id="nombre" name="nombre">
+				<input type="text" wicket:id="nombre" name="nombre" class="nombre">
 			</div>
 		</p>
 		
 		<p>
 			<div>
 				<b><label for="nombreLogin">Login: </label></b>
-				<input type="text" wicket:id="nombreLogin" name="nombreLogin">
+				<input type="text" wicket:id="nombreLogin" name="nombreLogin" class="nombre">
 			</div>
 		</p>
 		
@@ -39,14 +37,14 @@
 		<p>
 			<div>
 				<b><label for="password">Password: </label></b>
-				<input type="password" wicket:id="password" name="password">
+				<input type="password" wicket:id="password" name="password" class="password">
 			</div>
 		</p>
 		
 		<p>
 			<div>
 				<b><label for="dedicacion">Dedicaci&oacute;n: </label></b>
-				<input type="text" maxlength=1 wicket:id="dedicacion" name="dedicacion">
+				<input type="text" wicket:id="dedicacion" name="dedicacion" class="numeric" maxlength=1>
 			</div>
 		</p>
 		

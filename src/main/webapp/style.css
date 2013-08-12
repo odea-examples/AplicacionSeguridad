@@ -550,3 +550,14 @@
 	color: #666666;
 	text-decoration: none;
 }
+.numeric {
+	text-align: right;
+	width: 100px;	
+}
+.nombre {
+	text-align: left;
+	width: 200px;
+}
+.password {
+	width:200px;
+}

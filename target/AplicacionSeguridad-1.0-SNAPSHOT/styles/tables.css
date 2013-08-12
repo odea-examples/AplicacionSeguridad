@@ -71,3 +71,9 @@ tfoot th em {
 	font-size: 1.1em;
 	font-style: normal;
 	}	
+tfoot tr td {
+	color:#678197;
+	border-bottom:1px solid #e5eff8;
+	border-left:1px solid #e5eff8;
+	text-align:center;
+}	
