@@ -1,6 +1,7 @@
 package com.odea;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -42,10 +43,22 @@ public class EditarPerfilPage extends BasePage {
 	
 	
 	private void preparePage(Usuario perfil) {
-		
+		/*
         BookmarkablePageLink<PerfilesPage> linkVolver = new BookmarkablePageLink<PerfilesPage>("linkVolver", PerfilesPage.class);
         this.add(linkVolver);
-        
+        */
+		
+        AjaxLink<PerfilesPage> volverButton = new AjaxLink<PerfilesPage>("volverButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(PerfilesPage.class);
+			}
+		};
+		this.add(volverButton);
+
 		
 		Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(perfil));
 		this.add(form);

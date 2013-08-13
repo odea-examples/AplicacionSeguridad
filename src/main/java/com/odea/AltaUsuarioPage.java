@@ -3,6 +3,7 @@ package com.odea;
 import java.util.List;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -67,8 +68,17 @@ public class AltaUsuarioPage extends BasePage {
         };
         
         
-        BookmarkablePageLink<UsuariosPage> linkVolver = new BookmarkablePageLink<UsuariosPage>("linkVolver", UsuariosPage.class);
-        this.add(linkVolver);
+        AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(UsuariosPage.class);
+			}
+		};
+		this.add(volverButton);
+
 
 		Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
 		this.add(form);

@@ -5,10 +5,13 @@ import java.util.List;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -70,9 +73,21 @@ public class UsuariosPage extends BasePage {
             }
         };
         
+        AjaxLink<AltaUsuarioPage> altaButton = new AjaxLink<AltaUsuarioPage>("altaButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(AltaUsuarioPage.class);
+			}
+		};
+		this.add(altaButton);
+        
+        /*
         BookmarkablePageLink<AltaUsuarioPage> linkAltaUsuario = new BookmarkablePageLink<AltaUsuarioPage>("linkAltaUsuario", AltaUsuarioPage.class);
 		this.add(linkAltaUsuario);
-        
+        */
 		this.listViewContainer = new WebMarkupContainer("listViewContainer");
 		this.listViewContainer.setOutputMarkupId(true);
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -45,8 +46,17 @@ public class PerfilesPage extends BasePage {
         };
         
         
-        BookmarkablePageLink<EditarPerfilPage> linkAltaPerfil = new BookmarkablePageLink<EditarPerfilPage>("linkAltaPerfil", EditarPerfilPage.class);
-		this.add(linkAltaPerfil);
+        AjaxLink<EditarPerfilPage> altaButton = new AjaxLink<EditarPerfilPage>("altaButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(EditarPerfilPage.class);
+			}
+		};
+        this.add(altaButton);
+
         
         final FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackPanel");
         feedbackPanel.setOutputMarkupId(true);

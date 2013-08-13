@@ -1,6 +1,7 @@
 package com.odea;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -39,8 +40,17 @@ public class ModificarPasswordPage extends BasePage {
 	
 	private void preparePage(Usuario usuario) {
 		
-        BookmarkablePageLink<UsuariosPage> linkVolver = new BookmarkablePageLink<UsuariosPage>("linkVolver", UsuariosPage.class);
-        this.add(linkVolver);
+        AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				setResponsePage(UsuariosPage.class);
+			}
+		};
+		this.add(volverButton);
+
 
 		final Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
 		this.add(form);
