@@ -3,9 +3,9 @@ package com.odea;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -32,6 +32,7 @@ public class ModificarPasswordPage extends BasePage {
 		
 		Usuario usuario = new Usuario();
 		usuario.setIdUsuario(parameters.get("id").toInteger());
+		usuario.setNombre(parameters.get("usuarioNombre").toString());
 		
 		this.preparePage(usuario);
 		
@@ -50,7 +51,9 @@ public class ModificarPasswordPage extends BasePage {
 			}
 		};
 		this.add(volverButton);
-
+		
+		Label usuarioNombre = new Label("usuarioNombre", usuario.getNombre());
+		this.add(usuarioNombre);
 
 		final Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
 		this.add(form);

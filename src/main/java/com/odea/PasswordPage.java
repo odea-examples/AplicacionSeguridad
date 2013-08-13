@@ -88,7 +88,7 @@ public class PasswordPage extends BasePage {
 			public void validate(IValidatable<String> validatable) {
 				
 				if (!validatable.getValue().equals(password.getValue())) {
-					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimación' deben ser iguales.");
+					error(validatable, "Las passwords ingresadas en 'Nueva Password' y 'Confimación' deben ser iguales.");
 				}
 			}
 			

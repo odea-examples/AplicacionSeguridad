@@ -84,10 +84,7 @@ public class UsuariosPage extends BasePage {
 		};
 		this.add(altaButton);
         
-        /*
-        BookmarkablePageLink<AltaUsuarioPage> linkAltaUsuario = new BookmarkablePageLink<AltaUsuarioPage>("linkAltaUsuario", AltaUsuarioPage.class);
-		this.add(linkAltaUsuario);
-        */
+
 		this.listViewContainer = new WebMarkupContainer("listViewContainer");
 		this.listViewContainer.setOutputMarkupId(true);
 		
@@ -181,7 +178,7 @@ public class UsuariosPage extends BasePage {
             	item.add(botonModificarUsuario);
             	
             	
-            	BookmarkablePageLink<ModificarPasswordPage> botonModificarPassword = new BookmarkablePageLink<ModificarPasswordPage>("passwordLink", ModificarPasswordPage.class, new PageParameters().add("id", usuario.getIdUsuario()));
+            	BookmarkablePageLink<ModificarPasswordPage> botonModificarPassword = new BookmarkablePageLink<ModificarPasswordPage>("passwordLink", ModificarPasswordPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("usuarioNombre", usuario.getNombre()));
             	
             	item.add(botonModificarPassword);
             	

@@ -30,7 +30,7 @@ public class UsuarioDAO extends AbstractDAO {
 	
 	public List<Usuario> getUsuariosConPerfiles() {
 		
-		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login, d.dedicacion FROM users u, SEC_ASIG_PERFIL ap, users p, dedicacion_usuario d WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id AND d.usuario_id = u.u_id AND d.fecha_hasta IS NULL ORDER BY u.u_name ASC", new RowMapperUsuario());
+		List<Usuario> usuarios = jdbcTemplate.query("SELECT u.u_id, u.u_login, u.u_password, u.u_name, u.u_comanager, u.u_grupo, p.u_id, p.u_name, p.u_login, d.dedicacion FROM users u, SEC_ASIG_PERFIL ap, users p, dedicacion_usuario d WHERE u.u_id = ap.SEC_USUARIO_ID AND ap.SEC_PERFIL_ID = p.u_id AND d.usuario_id = u.u_id AND d.fecha_hasta IS NULL ORDER BY u.u_name ASC, u.u_login ASC", new RowMapperUsuario());
 		
 		return usuarios;
 	}
