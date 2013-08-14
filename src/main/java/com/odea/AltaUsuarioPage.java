@@ -37,7 +37,6 @@ public class AltaUsuarioPage extends BasePage {
 	public AltaUsuarioPage () {
 		Usuario usuario = new Usuario();
 		usuario.setGrupo("Ninguno");
-		usuario.setPerfil(daoService.getPerfilDeNombre("Administrador"));
 		
 		this.preparePage(usuario);
 	}
