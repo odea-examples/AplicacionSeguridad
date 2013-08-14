@@ -33,6 +33,7 @@ public class ModificarPasswordPage extends BasePage {
 		Usuario usuario = new Usuario();
 		usuario.setIdUsuario(parameters.get("id").toInteger());
 		usuario.setNombre(parameters.get("usuarioNombre").toString());
+		usuario.setNombreLogin(parameters.get("usuarioLogin").toString());
 		
 		this.preparePage(usuario);
 		
@@ -54,6 +55,10 @@ public class ModificarPasswordPage extends BasePage {
 		
 		Label usuarioNombre = new Label("usuarioNombre", usuario.getNombre());
 		this.add(usuarioNombre);
+		
+		Label usuarioLogin = new Label("usuarioLogin", usuario.getNombreLogin());
+		this.add(usuarioLogin);
+
 
 		final Form<Usuario> form = new Form<Usuario>("form", new CompoundPropertyModel<Usuario>(usuario));
 		this.add(form);

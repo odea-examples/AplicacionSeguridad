@@ -178,7 +178,7 @@ public class UsuariosPage extends BasePage {
             	item.add(botonModificarUsuario);
             	
             	
-            	BookmarkablePageLink<ModificarPasswordPage> botonModificarPassword = new BookmarkablePageLink<ModificarPasswordPage>("passwordLink", ModificarPasswordPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("usuarioNombre", usuario.getNombre()));
+            	BookmarkablePageLink<ModificarPasswordPage> botonModificarPassword = new BookmarkablePageLink<ModificarPasswordPage>("passwordLink", ModificarPasswordPage.class, new PageParameters().add("id", usuario.getIdUsuario()).add("usuarioNombre", usuario.getNombre()).add("usuarioLogin", usuario.getNombreLogin()));
             	
             	item.add(botonModificarPassword);
             	
