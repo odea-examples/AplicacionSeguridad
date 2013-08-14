@@ -88,6 +88,7 @@
           <string>WEB-INF/classes/com/odea/AltaUsuarioPage$2.class</string>
           <string>WEB-INF/classes/com/odea/PermisosPage$2.class</string>
           <string>WEB-INF/classes/com/odea/AltaUsuarioPage$4.class</string>
+          <string>WEB-INF/classes/com/odea/behavior/focusOnLoad/FocusOnLoadBehavior.class</string>
           <string>WEB-INF/classes/com/odea/PermisosPage$4$1.class</string>
           <string>WEB-INF/classes/com/odea/services/EncodingService.class</string>
           <string>WEB-INF/classes/com/odea/services/DAOService.class</string>

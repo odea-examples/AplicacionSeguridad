@@ -42,13 +42,15 @@ public class ModificarPasswordPage extends BasePage {
 	
 	private void preparePage(Usuario usuario) {
 		
+		final Integer usuarioID = usuario.getIdUsuario(); 
+		
         AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				setResponsePage(UsuariosPage.class);
+				setResponsePage(UsuariosPage.class, new PageParameters().add("usuarioID", usuarioID));
 			}
 		};
 		this.add(volverButton);
@@ -111,7 +113,7 @@ public class ModificarPasswordPage extends BasePage {
 				
 				try {
 					ModificarPasswordPage.this.daoService.modificarPasswordUsuario(usuario);
-					this.setResponsePage(UsuariosPage.class);
+					this.setResponsePage(UsuariosPage.class, new PageParameters().add("usuarioID", usuario.getIdUsuario()));
 				} catch (Exception ex) {
 					this.error(ex.getMessage());
 					target.add(feedbackPanel);

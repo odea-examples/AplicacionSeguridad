@@ -78,13 +78,16 @@ public class ModificarUsuarioPage extends BasePage {
             }
         };
 
+        
+        final Integer usuarioID = usuario.getIdUsuario();
+        
         AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				setResponsePage(UsuariosPage.class);
+				setResponsePage(UsuariosPage.class, new PageParameters().add("usuarioID", usuarioID));
 			}
 		};
 		this.add(volverButton);
