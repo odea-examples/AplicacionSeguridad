@@ -13,7 +13,10 @@
 	<br>
 		
 	<h3>Alta de un Nuevo Usuario</h3>
-	<br>
+	
+	<p><i><sub>
+		<span>Los campos con asterisco (*) son obligatorios.</span>
+	</sub></i></p>
 		
 	<form wicket:id="form">
 		
@@ -21,14 +24,14 @@
 				
 		<p>
 			<div>
-				<b><label for="nombre">Nombre: </label></b>
+				<b><label for="nombre">Nombre* </label></b>
 				<input type="text" wicket:id="nombre" name="nombre" class="nombre">
 			</div>
 		</p>
 		
 		<p>
 			<div>
-				<b><label for="nombreLogin">Login: </label></b>
+				<b><label for="nombreLogin">Login* </label></b>
 				<input type="text" wicket:id="nombreLogin" name="nombreLogin" class="nombre">
 			</div>
 		</p>
@@ -36,14 +39,14 @@
 		
 		<p>
 			<div>
-				<b><label for="password">Password: </label></b>
+				<b><label for="password">Password* </label></b>
 				<input type="password" wicket:id="password" name="password" class="password">
 			</div>
 		</p>
 		
 		<p>
 			<div>
-				<b><label for="dedicacion">Dedicaci&oacute;n: </label></b>
+				<b><label for="dedicacion">Dedicaci&oacute;n* </label></b>
 				<input type="text" wicket:id="dedicacion" name="dedicacion" class="numeric" maxlength=1>
 			</div>
 		</p>
@@ -52,12 +55,12 @@
 			<div style="width:600px;">
 			
 				<div style="float:left; width:300px;">	
-					<b><label for="perfil">Perfil: </label></b>
+					<b><label for="perfil">Perfil* </label></b>
 					<select wicket:id="perfil" name="perfil"></select>
 				</div>
 				
 				<div style="float:right; width:300px;">
-					<b><label for="grupo">Grupo: </label></b>
+					<b><label for="grupo">Grupo* </label></b>
 					<select wicket:id="grupo" name="grupo"></select>
 				</div>
 				
