@@ -156,7 +156,7 @@ public class ModificarUsuarioPage extends BasePage {
 				
 				try {
 					ModificarUsuarioPage.this.daoService.modificarUsuario(usuario);
-					this.setResponsePage(UsuariosPage.class);
+					this.setResponsePage(UsuariosPage.class, new PageParameters().add("usuarioID", usuario.getIdUsuario()));
 				} catch (Exception ex) {
 					this.error(ex.getMessage());
 					target.add(feedbackPanel);

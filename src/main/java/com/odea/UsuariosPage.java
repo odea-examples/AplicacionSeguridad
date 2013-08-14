@@ -40,7 +40,7 @@ public class UsuariosPage extends BasePage {
 	private WebMarkupContainer listViewContainer;
 	
 	
-	public UsuariosPage() {
+	public UsuariosPage(final PageParameters parameters) {
 
 		this.lstUsuariosModel = new LoadableDetachableModel<List<Usuario>>() {
 			
@@ -88,6 +88,7 @@ public class UsuariosPage extends BasePage {
 		this.listViewContainer = new WebMarkupContainer("listViewContainer");
 		this.listViewContainer.setOutputMarkupId(true);
 		
+		
 		//LISTADO
 		PageableListView<Usuario> usuariosListView = new PageableListView<Usuario>("usuarios", this.lstUsuariosModel, 20) {
 			
@@ -96,11 +97,12 @@ public class UsuariosPage extends BasePage {
 			@Override
             protected void populateItem(ListItem<Usuario> item) {
             	final Usuario usuario = item.getModel().getObject();   
-            
+            	
             	if((item.getIndex() % 2) == 0){
             		item.add(new AttributeModifier("class","odd"));
-            	}
+            	}	
             	
+        
             	/*NOMBRE*/
             	
             	item.add(new Label("nombreUsuario", new Model<String>(usuario.getNombre())));
@@ -196,11 +198,14 @@ public class UsuariosPage extends BasePage {
                 };
             
                 item.add(botonBajaUsuario);
-            	
+                
             }
+			
+			
         };
         
         usuariosListView.setOutputMarkupId(true);
+        this.setListView(usuariosListView, parameters);
         
         this.listViewContainer.add(new Label("tituloDedicacion", "Dedicación"));
         this.listViewContainer.add(usuariosListView);
@@ -209,6 +214,26 @@ public class UsuariosPage extends BasePage {
 
         this.add(listViewContainer);
 		
+	}
+	
+	
+	private void setListView(PageableListView<Usuario> listView, PageParameters parameters) {
+		if (!parameters.get("usuarioID").isNull()) {
+    		
+			Integer itemIndex = 1;
+    		Integer idUsuarioBuscada = parameters.get("usuarioID").toInteger();
+    		
+    		for (Usuario unUsuario : listView.getList()) {
+    			
+    			if(idUsuarioBuscada.equals(unUsuario.getIdUsuario())) {
+    				Long pagina = itemIndex / listView.getItemsPerPage();
+    				listView.setCurrentPage(pagina);
+    			}
+    			
+    			itemIndex++;
+			}
+			
+		}
 	}
 	
 }
