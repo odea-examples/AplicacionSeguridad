@@ -3,7 +3,6 @@ package com.odea;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -13,6 +12,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.odea.behavior.focusOnLoad.FocusOnLoadBehavior;
 import com.odea.services.LoginService;
 
 
@@ -46,7 +46,7 @@ public class LoginPage extends BasePage {
             
             RequiredTextField<String> userName = new RequiredTextField<String>("userName");
             userName.setLabel(Model.of("Usuario"));
-            //userName.add(new FocusOnLoadBehavior());
+            userName.add(new FocusOnLoadBehavior());
             
             PasswordTextField passwd = new PasswordTextField("passwd");
             passwd.setLabel(Model.of("Password"));
