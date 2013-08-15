@@ -24,8 +24,6 @@ import com.odea.services.DAOService;
 
 public class PerfilesPage extends BasePage {
 
-	private static final long serialVersionUID = 1L;
-
 	@SpringBean
 	private DAOService daoService;
 	
@@ -36,9 +34,7 @@ public class PerfilesPage extends BasePage {
 	public PerfilesPage() {
        
         this.lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() { 
-
-			private static final long serialVersionUID = 1L;
-
+        	
 			@Override
             protected List<Usuario> load() {
             	return daoService.getPerfiles();
@@ -47,8 +43,6 @@ public class PerfilesPage extends BasePage {
         
         
         AjaxLink<EditarPerfilPage> altaButton = new AjaxLink<EditarPerfilPage>("altaButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -67,9 +61,7 @@ public class PerfilesPage extends BasePage {
 		this.listViewContainer.setOutputMarkupId(true);
 		
 		
-		PageableListView<Usuario> perfilesListView = new PageableListView<Usuario>("perfiles", this.lstPerfilesModel, 20) {
-
-			private static final long serialVersionUID = 1L;
+		PageableListView<Usuario> perfilesListView = new PageableListView<Usuario>("perfiles", this.lstPerfilesModel, 8) {
 
 			@Override
             protected void populateItem(ListItem<Usuario> item) {
@@ -92,8 +84,6 @@ public class PerfilesPage extends BasePage {
             	
             	
             	ConfirmationLink<Usuario> botonBajaPerfil = new ConfirmationLink<Usuario>("deleteLink","\\u00BFEst\\xE1 seguro de que desea borrar este perfil?", new Model<Usuario>(perfil)) {
-
-					private static final long serialVersionUID = 1L;
 
 					@Override
                     public void onClick(AjaxRequestTarget ajaxRequestTarget) {

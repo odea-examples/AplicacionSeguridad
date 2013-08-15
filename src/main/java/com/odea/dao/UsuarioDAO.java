@@ -2,7 +2,6 @@ package com.odea.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.odea.domain.Usuario;
-
 
 
 @Repository

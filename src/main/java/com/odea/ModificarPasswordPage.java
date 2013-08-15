@@ -22,8 +22,6 @@ import com.odea.services.DAOService;
 
 public class ModificarPasswordPage extends BasePage {
 	
-	private static final long serialVersionUID = 1L;
-
 	@SpringBean
 	private DAOService daoService;
 	
@@ -46,12 +44,11 @@ public class ModificarPasswordPage extends BasePage {
 		
         AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				setResponsePage(UsuariosPage.class, new PageParameters().add("usuarioID", usuarioID));
 			}
+			
 		};
 		this.add(volverButton);
 		
@@ -78,19 +75,17 @@ public class ModificarPasswordPage extends BasePage {
 		
 		
 		PasswordTextField passConfirmacion = new PasswordTextField("contraseniaConfirmacion", new Model<String>(new String()));
-		passConfirmacion.setLabel(Model.of("Confirmación"));
+		passConfirmacion.setLabel(Model.of("Confirmaci\363n"));
 		passConfirmacion.setRequired(true);
 		form.add(passConfirmacion);
 		passConfirmacion.add(new StringValidator(0, 30));
 		passConfirmacion.add(new IValidator<String>() {
-			
-			private static final long serialVersionUID = 1L;
-			
+						
 			@Override
 			public void validate(IValidatable<String> validatable) {
 				
 				if (!validatable.getValue().equals(password.getValue())) {
-					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimación de password' deben ser iguales.");
+					error(validatable, "Las passwords ingresadas en 'Password' y 'Confimaci\363n de password' deben ser iguales.");
 				}
 			}
 			
@@ -104,8 +99,6 @@ public class ModificarPasswordPage extends BasePage {
 		    	
     	
 		AjaxButton submit = new AjaxButton("submit", form) {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
@@ -133,9 +126,6 @@ public class ModificarPasswordPage extends BasePage {
 		form.add(submit);
 		
 	}
-	
-	
-
 
 	
 }

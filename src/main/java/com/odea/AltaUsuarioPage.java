@@ -9,16 +9,11 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.validation.IValidatable;
-import org.apache.wicket.validation.IValidator;
-import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
 
 import com.odea.behaviour.OnlyNumberBehavior;
@@ -28,8 +23,7 @@ import com.odea.services.DAOService;
 
 public class AltaUsuarioPage extends BasePage {
 	
-	private static final long serialVersionUID = 1L;
-
+	
 	@SpringBean
 	private DAOService daoService;
 	
@@ -47,8 +41,6 @@ public class AltaUsuarioPage extends BasePage {
 		
         LoadableDetachableModel<List<Usuario>> lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() { 
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected List<Usuario> load() {
             	return daoService.getPerfiles();
@@ -58,8 +50,6 @@ public class AltaUsuarioPage extends BasePage {
 		
         LoadableDetachableModel<List<String>> lstGruposModel = new LoadableDetachableModel<List<String>>() { 
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected List<String> load() {
             	return daoService.getGrupos();
@@ -68,8 +58,6 @@ public class AltaUsuarioPage extends BasePage {
         
         
         AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -105,7 +93,7 @@ public class AltaUsuarioPage extends BasePage {
 		
 		RequiredTextField<Integer> dedicacion = new RequiredTextField<Integer>("dedicacion");
 		dedicacion.add(new OnlyNumberBehavior(dedicacion.getMarkupId()));
-		dedicacion.setLabel(Model.of("Dedicación"));
+		dedicacion.setLabel(Model.of("Dedicaci\363n"));
 		form.add(dedicacion);
 		
     	DropDownChoice<String> grupo = new DropDownChoice<String>("grupo", lstGruposModel);
@@ -120,8 +108,6 @@ public class AltaUsuarioPage extends BasePage {
     	
     	
 		AjaxButton submit = new AjaxButton("submit", form) {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

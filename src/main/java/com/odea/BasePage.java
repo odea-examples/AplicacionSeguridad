@@ -7,13 +7,8 @@ import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class BasePage extends WebPage {
-	
-	private static final long serialVersionUID = 1L;
-		
+public class BasePage extends WebPage {		
 	
 	public BasePage(){
 		
@@ -22,8 +17,6 @@ public class BasePage extends WebPage {
 	    
 	    
 		AjaxButton botonLogout = new AjaxButton("botonLogout") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

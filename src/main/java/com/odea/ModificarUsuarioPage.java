@@ -7,9 +7,7 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.LoadableDetachableModel;
@@ -28,12 +26,9 @@ import com.odea.services.DAOService;
 
 public class ModificarUsuarioPage extends BasePage {
 	
-	private static final long serialVersionUID = 1L;
-
 	@SpringBean
 	private DAOService daoService;
 	
-	private String loginActual;
 	
 	public ModificarUsuarioPage (final PageParameters parameters) {
 		
@@ -48,8 +43,6 @@ public class ModificarUsuarioPage extends BasePage {
 		Usuario perfil =  daoService.getPerfilDeNombre(parameters.get("perfilUsuario").toString());
 		usuario.setPerfil(perfil);
 		
-		this.loginActual = parameters.get("loginUsuario").toString();
-		
 		this.preparePage(usuario);
 		
 	}
@@ -59,8 +52,6 @@ public class ModificarUsuarioPage extends BasePage {
 		
         LoadableDetachableModel<List<Usuario>> lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() { 
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected List<Usuario> load() {
             	return daoService.getPerfiles();
@@ -69,8 +60,6 @@ public class ModificarUsuarioPage extends BasePage {
 		
 		
         LoadableDetachableModel<List<String>> lstGruposModel = new LoadableDetachableModel<List<String>>() { 
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
             protected List<String> load() {
@@ -82,8 +71,6 @@ public class ModificarUsuarioPage extends BasePage {
         final Integer usuarioID = usuario.getIdUsuario();
         
         AjaxLink<UsuariosPage> volverButton = new AjaxLink<UsuariosPage>("volverButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -109,9 +96,7 @@ public class ModificarUsuarioPage extends BasePage {
 		login.setLabel(Model.of("Login"));
 		form.add(login);
 		login.add(new StringValidator(1,30));
-		login.add(new IValidator<String>() {
-			private static final long serialVersionUID = 1L;
-			
+		login.add(new IValidator<String>() {			
 			
 			@Override
 			public void validate(IValidatable<String> validatable) {
@@ -135,7 +120,7 @@ public class ModificarUsuarioPage extends BasePage {
 		
 		RequiredTextField<Integer> dedicacion = new RequiredTextField<Integer>("dedicacion");
 		dedicacion.add(new OnlyNumberBehavior(dedicacion.getMarkupId()));
-		dedicacion.setLabel(Model.of("Dedicación"));
+		dedicacion.setLabel(Model.of("Dedicaci\363n"));
 		form.add(dedicacion);
 		
     	DropDownChoice<String> grupo = new DropDownChoice<String>("grupo", lstGruposModel);
@@ -150,8 +135,6 @@ public class ModificarUsuarioPage extends BasePage {
     	
     	
 		AjaxButton submit = new AjaxButton("submit", form) {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

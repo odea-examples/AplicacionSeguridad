@@ -17,20 +17,8 @@ public class SeguridadDAO extends AbstractDAO {
 	
     private static final Logger logger = LoggerFactory.getLogger(SeguridadDAO.class);
 	
-	public Integer getPrueba() {
-		
-		logger.debug("SE BUSCA EL DATO");
-		
-		Integer resultado = jdbcTemplate.queryForInt("SELECT COUNT(*) FROM users");
-		
-		logger.debug("SE ENCONTRO EL DATO");
-		
-		return resultado;
-	}
-	
-	
-	
-	public void setPassword(String username, String password) {
+
+    public void setPassword(String username, String password) {
 		
 		logger.debug("SE PROCEDE A CAMBIAR LA CONTRASEÑA DEL USUARIO - username: " + username);
 			

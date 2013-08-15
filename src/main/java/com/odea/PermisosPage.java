@@ -9,7 +9,6 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.markup.html.WebComponent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -31,8 +30,6 @@ import com.odea.services.DAOService;
 
 
 public class PermisosPage extends BasePage {
-	
-	private static final long serialVersionUID = 1L;
 
 	@SpringBean
 	private DAOService daoService;
@@ -45,8 +42,6 @@ public class PermisosPage extends BasePage {
 		
 		this.lstFuncionalidadesModel = new LoadableDetachableModel<List<Funcionalidad>>() {
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
 			protected List<Funcionalidad> load() {
 				return daoService.getFuncionalidades();
@@ -54,8 +49,6 @@ public class PermisosPage extends BasePage {
 		};
 		
 		this.lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected List<Usuario> load() {
@@ -73,8 +66,6 @@ public class PermisosPage extends BasePage {
 		
 	
 		WebComponent titulos = new WebComponent("tituloHtml"){
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onComponentTagBody(MarkupStream markupStream,ComponentTag openTag) {
@@ -99,8 +90,6 @@ public class PermisosPage extends BasePage {
 		
 		ListView<Funcionalidad> listaFuncionalidades = new ListView<Funcionalidad>("listaFuncionalidades", this.lstFuncionalidadesModel) {
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
 			protected void populateItem(ListItem<Funcionalidad> item) {
 				
@@ -116,9 +105,6 @@ public class PermisosPage extends BasePage {
 				
 				ListView<Usuario> listaInterna = new ListView<Usuario>("listaUsuarios", PermisosPage.this.lstPerfilesModel) {
 
-					private static final long serialVersionUID = 1L;
-
-
 					@Override
 					protected void populateItem(ListItem<Usuario> item) {
 						
@@ -129,8 +115,6 @@ public class PermisosPage extends BasePage {
 						checkBox.getModel().setObject(habilitado);
 						
 						checkBox.add(new AjaxEventBehavior("onChange") {
-							
-							private static final long serialVersionUID = 1L;
 
 							@Override
 							protected void onEvent(AjaxRequestTarget target) {

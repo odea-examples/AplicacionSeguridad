@@ -20,7 +20,6 @@ import com.odea.domain.Usuario;
 import com.odea.services.DAOService;
 
 public class PasswordPage extends BasePage {
-	private static final long serialVersionUID = 1L;
 
 	@SpringBean
 	private DAOService daoService;
@@ -46,7 +45,6 @@ public class PasswordPage extends BasePage {
 		passActual.add(new StringValidator(0,30));
 		passActual.setRequired(true);
 		passActual.add(new IValidator<String>() {
-			private static final long serialVersionUID = 1L;
 			
 			@Override
 			public void validate(IValidatable<String> validatable) {
@@ -77,18 +75,16 @@ public class PasswordPage extends BasePage {
 		
 		
 		final PasswordTextField passConfirmacion = new PasswordTextField("contraseniaConfirmacion", new Model<String>(new String()));
-		passConfirmacion.setLabel(Model.of("Confirmación"));
+		passConfirmacion.setLabel(Model.of("Confirmaci\363n"));
 		passConfirmacion.setRequired(true);
 		passConfirmacion.add(new StringValidator(0, 30));
 		passConfirmacion.add(new IValidator<String>() {
-			
-			private static final long serialVersionUID = 1L;
-			
+						
 			@Override
 			public void validate(IValidatable<String> validatable) {
 				
 				if (!validatable.getValue().equals(password.getValue())) {
-					error(validatable, "Las passwords ingresadas en 'Nueva Password' y 'Confimación' deben ser iguales.");
+					error(validatable, "Las passwords ingresadas en 'Nueva Password' y 'Confimaci\363n' deben ser iguales.");
 				}
 			}
 			
@@ -106,8 +102,6 @@ public class PasswordPage extends BasePage {
 		
 		final SelectModalWindow selectModalWindow = new SelectModalWindow("modalWindow"){
 
-			private static final long serialVersionUID = 1L;
-
 			public void onCancel(AjaxRequestTarget target) {
                 close(target);
             }
@@ -117,8 +111,6 @@ public class PasswordPage extends BasePage {
         
 		
 		AjaxButton submit = new AjaxButton("submit", form) {
-
-			private static final long serialVersionUID = 1L;
 			
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

@@ -5,7 +5,6 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -17,8 +16,6 @@ import com.odea.services.DAOService;
 
 public class EditarPerfilPage extends BasePage {
 
-	private static final long serialVersionUID = 1L;
-	
 	@SpringBean
 	private DAOService daoService;
 
@@ -43,14 +40,8 @@ public class EditarPerfilPage extends BasePage {
 	
 	
 	private void preparePage(Usuario perfil) {
-		/*
-        BookmarkablePageLink<PerfilesPage> linkVolver = new BookmarkablePageLink<PerfilesPage>("linkVolver", PerfilesPage.class);
-        this.add(linkVolver);
-        */
 		
         AjaxLink<PerfilesPage> volverButton = new AjaxLink<PerfilesPage>("volverButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -72,8 +63,6 @@ public class EditarPerfilPage extends BasePage {
 		form.add(nombre);
 		
 		AjaxButton submit = new AjaxButton("submitButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {

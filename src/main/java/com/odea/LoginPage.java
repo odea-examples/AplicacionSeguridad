@@ -15,11 +15,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import com.odea.behavior.focusOnLoad.FocusOnLoadBehavior;
 import com.odea.services.LoginService;
 
-
 public class LoginPage extends BasePage {
-	
-    private static final long serialVersionUID = 1L;
-    
+		
     @SpringBean
     private LoginService loginService;
 
@@ -28,16 +25,15 @@ public class LoginPage extends BasePage {
 
     public LoginPage() {
         LoginForm loginForm = new LoginForm("loginForm");
-        add(loginForm);
+        this.add(loginForm);
     }
 
     public void login() {
-        this.loginService.login(this.userName, passwd);
+        this.loginService.login(this.userName, this.passwd);
     }
 
-    class LoginForm extends Form {
+    private class LoginForm extends Form {
 
-		private static final long serialVersionUID = 1L;
 		private IModel<LoginPage> loginModel = new CompoundPropertyModel<LoginPage>(LoginPage.this);
 
         public LoginForm(String id) {
@@ -54,8 +50,6 @@ public class LoginPage extends BasePage {
             FeedbackPanel feedBackPanel = new FeedbackPanel("feedBackPanel");         
             
             AjaxButton submit = new AjaxButton("submit", this) {
-
-				private static final long serialVersionUID = 1L;
 
 				@Override
                 protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
@@ -76,16 +70,12 @@ public class LoginPage extends BasePage {
             };
 
             
-            add(feedBackPanel);
-            add(userName);
-            add(passwd);
-            add(submit);
-            setOutputMarkupId(true);
+            this.add(feedBackPanel);
+            this.add(userName);
+            this.add(passwd);
+            this.add(submit);
+            this.setOutputMarkupId(true);
         }
     }
-
-    public void setLoginService(LoginService loginService) {
-        this.loginService = loginService;
-    }
-
+    
 }

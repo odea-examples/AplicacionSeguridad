@@ -6,12 +6,10 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -29,8 +27,6 @@ import com.odea.services.DAOService;
 
 public class UsuariosPage extends BasePage {
 
-	private static final long serialVersionUID = 1L;
-
 	@SpringBean
 	private DAOService daoService;
 	
@@ -43,8 +39,6 @@ public class UsuariosPage extends BasePage {
 	public UsuariosPage(final PageParameters parameters) {
 
 		this.lstUsuariosModel = new LoadableDetachableModel<List<Usuario>>() {
-			
-			private static final long serialVersionUID = 1L;
 
 			@Override
             protected List<Usuario> load() {
@@ -55,8 +49,6 @@ public class UsuariosPage extends BasePage {
         
         this.lstPerfilesModel = new LoadableDetachableModel<List<Usuario>>() { 
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected List<Usuario> load() {
             	return daoService.getPerfiles();
@@ -65,8 +57,6 @@ public class UsuariosPage extends BasePage {
         
         this.lstGruposModel = new LoadableDetachableModel<List<String>>() { 
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected List<String> load() {
             	return daoService.getGrupos();
@@ -74,8 +64,6 @@ public class UsuariosPage extends BasePage {
         };
         
         AjaxLink<AltaUsuarioPage> altaButton = new AjaxLink<AltaUsuarioPage>("altaButton") {
-
-			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
@@ -90,10 +78,8 @@ public class UsuariosPage extends BasePage {
 		
 		
 		//LISTADO
-		PageableListView<Usuario> usuariosListView = new PageableListView<Usuario>("usuarios", this.lstUsuariosModel, 20) {
+		PageableListView<Usuario> usuariosListView = new PageableListView<Usuario>("usuarios", this.lstUsuariosModel, 8) {
 			
-			private static final long serialVersionUID = 1L;
-
 			@Override
             protected void populateItem(ListItem<Usuario> item) {
             	final Usuario usuario = item.getModel().getObject();   
@@ -114,8 +100,6 @@ public class UsuariosPage extends BasePage {
             	dedicacionTextField.add(new OnlyNumberBehavior(dedicacionTextField.getMarkupId()));
             	
             	dedicacionTextField.add(new AjaxFormComponentUpdatingBehavior("onchange") {
-            		
-					private static final long serialVersionUID = 1L;
 
 					@Override
     				protected void onUpdate(AjaxRequestTarget target) {
@@ -142,8 +126,6 @@ public class UsuariosPage extends BasePage {
             	
             	dropDownPerfil.add(new AjaxFormComponentUpdatingBehavior("onchange") {
 
-					private static final long serialVersionUID = 1L;
-
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
 						daoService.cambiarPerfil(usuario, dropDownPerfil.getModelObject());
@@ -155,13 +137,12 @@ public class UsuariosPage extends BasePage {
             	
             	item.add(dropDownPerfil);
             	
+            	
             	/*GRUPO*/
             	
             	final DropDownChoice<String> dropDownGrupo = new DropDownChoice<String>("dropDownGrupo", Model.of(usuario.getGrupo()), UsuariosPage.this.lstGruposModel);
             	
             	dropDownGrupo.add(new AjaxFormComponentUpdatingBehavior("onchange") {
-
-					private static final long serialVersionUID = 1L;
 
 					@Override
 					protected void onUpdate(AjaxRequestTarget target) {
@@ -187,8 +168,6 @@ public class UsuariosPage extends BasePage {
             	
             	ConfirmationLink<Usuario> botonBajaUsuario = new ConfirmationLink<Usuario>("deleteLink","\\u00BFEst\\xE1 seguro de que desea borrar este usuario?", new Model<Usuario>(usuario)) {
 
-					private static final long serialVersionUID = 1L;
-
 					@Override
                     public void onClick(AjaxRequestTarget ajaxRequestTarget) {
                         UsuariosPage.this.daoService.bajaUsuario(this.getModelObject());
@@ -205,9 +184,9 @@ public class UsuariosPage extends BasePage {
         };
         
         usuariosListView.setOutputMarkupId(true);
-        this.setListView(usuariosListView, parameters);
+        this.actualizarPagina(usuariosListView, parameters);
         
-        this.listViewContainer.add(new Label("tituloDedicacion", "Dedicación"));
+        
         this.listViewContainer.add(usuariosListView);
         this.listViewContainer.add(new AjaxPagingNavigator("navigator", usuariosListView));
         this.listViewContainer.setVersioned(false);
@@ -217,7 +196,7 @@ public class UsuariosPage extends BasePage {
 	}
 	
 	
-	private void setListView(PageableListView<Usuario> listView, PageParameters parameters) {
+	private void actualizarPagina(PageableListView<Usuario> listView, PageParameters parameters) {
 		if (!parameters.get("usuarioID").isNull()) {
     		
 			Integer itemIndex = 1;

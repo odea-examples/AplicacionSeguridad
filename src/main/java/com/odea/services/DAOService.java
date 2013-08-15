@@ -21,12 +21,6 @@ public class DAOService {
 	private transient UsuarioDAO usuarioDAO;
 	
 	
-	
-	public Integer getPrueba() {
-		return seguridadDAO.getPrueba();
-	}
-	
-	
 	public void setPassword(String username, String password) {
 		seguridadDAO.setPassword(username, password);
 	}
